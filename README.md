@@ -1,4 +1,4 @@
-# easy-vote-web
+# ShardEx
 
 ## Project setup
 ```
