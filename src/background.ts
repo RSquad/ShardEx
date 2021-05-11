@@ -1,10 +1,8 @@
 import { store } from "./store/index";
 import { TonService } from "@/ton/ton.service";
 
-// @ts-ignore
 browser.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === "install") {
-    // @ts-ignore
     browser.tabs.create({ url: "index.html#/initialize" });
   }
 });
@@ -25,7 +23,7 @@ store.subscribe((mutation) => {
     tonService.setNetwork(server);
   }
 });
-// // @ts-ignore
+
 // const extensionId = browser.runtime.id;
 
 // const handleMessage = async (request: any, sender: any) => {
@@ -39,7 +37,6 @@ store.subscribe((mutation) => {
 //   return result;
 // };
 
-// // @ts-ignore
 // browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 //   if (undefined === request.method) {
 //     return;

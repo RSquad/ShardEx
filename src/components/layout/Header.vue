@@ -204,9 +204,7 @@ export default class Header extends Mappers {
   }
 
   expandView() {
-    // @ts-ignore
     const extensionURL = browser.runtime.getURL("index.html");
-    // @ts-ignore
     browser.tabs.create({ url: extensionURL });
   }
 }
@@ -218,6 +216,9 @@ export default class Header extends Mappers {
     width: 80px
     height: 30px
     margin-right: 8px
+    @media screen and (min-width: 375px)
+      width: 90px
+      height: 40px
   &__select
     max-width: 150px
     @media screen and (min-width: 375px)

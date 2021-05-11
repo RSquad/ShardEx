@@ -9,26 +9,22 @@ import VuexPersistence from "vuex-persist";
 Vue.use(Vuex);
 
 export const browserVuexLocalStorage = {
-  setItem: (key: string | number, value: any) => {
-    const newItemCache: any = {}; // note: storage.local needs an object with a property of the key name, so newItemCache is not what we're saving, value is.
+  setItem: (key: string | number, value: any): Promise<any> => {
+    const newItemCache: any = {};
     newItemCache[key] = value;
-    // @ts-ignore
+
     return browser.storage.local.set(newItemCache);
   },
-  getItem: (key: any) => {
-    // @ts-ignore
+  getItem: (key: any): Promise<any> => {
     return browser.storage.local.get(key).then((data: any) => data[key]);
   },
-  removeItem: (key: string | string[]) => {
-    // @ts-ignore
+  removeItem: (key: string | string[]): Promise<any> => {
     return browser.storage.local.remove(key);
   },
-  clear: () => {
-    // @ts-ignore
+  clear: (): Promise<any> => {
     return browser.storage.local.clear();
   },
-  // @ts-ignore
-  length: () => browser.storage.local.get("vuex").then((data: any) => data["vuex"].length),
+  length: (): Promise<any> => browser.storage.local.get("vuex").then((data: any) => data["vuex"].length),
   key: (): Promise<string> =>
     new Promise((resolve) => {
       setTimeout(() => {
