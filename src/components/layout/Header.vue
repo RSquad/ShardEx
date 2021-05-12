@@ -3,7 +3,7 @@
     <Inner>
       <div class="d-flex align-center" :style="{ height: '100%' }">
         <RouterLink to="/">
-          <img class="v-app-bar__logo" src="@/assets/img/logo.svg" alt="logo" />
+          <img class="v-app-bar__logo" src="@/assets/img/logo.png" alt="logo" />
         </RouterLink>
         <VSpacer />
         <VSelect
@@ -28,7 +28,7 @@
           left
           offset-y
           nudge-bottom="10"
-          v-if="accountsCount !== 0"
+          v-if="accountsCount !== 0 && !getIsLocked"
         >
           <template v-slot:activator="{ on }">
             <VBtn x-small class="ml-5 mr-1" icon v-on="on">
@@ -49,7 +49,7 @@
                 </VTooltip>
               </div>
               <v-divider></v-divider>
-              <VList max-height="228px" class="v-app-bar__list">
+              <VList max-height="185px" class="v-app-bar__list">
                 <VListItemGroup
                   @change="onChange"
                   v-model="modelActiveAccountAddress"
@@ -117,6 +117,7 @@ import { convertSeedToKeyPair, generateSeed } from "@/ton/ton.utils";
 import { isEmpty } from "lodash";
 import { Component, Inject, Vue } from "vue-property-decorator";
 import Inner from "@/components/layout/Inner.vue";
+import { rootModuleMapper } from "@/store/root";
 const Mappers = Vue.extend({
   methods: {
     ...walletModuleMapper.mapMutations([
@@ -137,6 +138,7 @@ const Mappers = Vue.extend({
       "activeAccountAddress",
       "isStoreRestored",
     ]),
+    ...rootModuleMapper.mapGetters(["getIsLocked"]),
     ...accountsModuleMapper.mapGetters(["accounts", "accountsCount"]),
     ...networksModuleMapper.mapGetters(["networksForSelect"]),
     modelNetwork: {
@@ -213,16 +215,9 @@ export default class Header extends Mappers {
 <style lang="sass" scoped>
 .v-app-bar
   &__logo
-    width: 80px
-    height: 30px
     margin-right: 8px
-    @media screen and (min-width: 375px)
-      width: 90px
-      height: 40px
   &__select
-    max-width: 150px
-    @media screen and (min-width: 375px)
-      max-width: 200px
+    max-width: 200px
   &__list
     overflow-y: auto
 </style>

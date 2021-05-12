@@ -12,7 +12,6 @@ export const browserVuexLocalStorage = {
   setItem: (key: string | number, value: any): Promise<any> => {
     const newItemCache: any = {};
     newItemCache[key] = value;
-
     return browser.storage.local.set(newItemCache);
   },
   getItem: (key: any): Promise<any> => {
@@ -52,8 +51,6 @@ export const store = createStore(root, {
         "accounts/deleteAccount",
         "accounts/deleteAllAccounts",
         "accounts/setIsExist",
-        "accounts/setPendingTransactions",
-        "accounts/setTransactions",
         "accounts/updateBalanceByAddressMut",
         "keystore/removeAllKey",
         "keystore/removeKey",

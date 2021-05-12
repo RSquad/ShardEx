@@ -48,7 +48,7 @@
             </VBtn>
           </div>
         </div>
-        <div class="my-4" v-if="!account.isRestoredWithKeyPair">
+        <div class="mt-4" v-if="!account.isRestoredWithKeyPair">
           <VBtn
             x-small
             @click="onClickExportSeedPhrase"
@@ -75,6 +75,7 @@
           v-if="!secretKey"
           width="100%"
           color="primary"
+          class="mt-4"
         >
           Export Secret Key</VBtn
         >
@@ -87,6 +88,7 @@
           hide-details
           readonly
           label="Secret Key"
+          class="mt-4"
         ></VTextarea>
       </VCardText>
     </VCard>
