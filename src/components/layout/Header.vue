@@ -2,7 +2,7 @@
   <v-app-bar :height="90" class="v-app-bar" app flat>
     <Inner>
       <div class="d-flex align-center" :style="{ height: '100%' }">
-        <RouterLink to="/">
+        <RouterLink class="d-flex" to="/">
           <img class="v-app-bar__logo" src="@/assets/img/logo.png" alt="logo" />
         </RouterLink>
         <VSpacer />
@@ -31,8 +31,16 @@
           v-if="accountsCount !== 0 && !getIsLocked"
         >
           <template v-slot:activator="{ on }">
-            <VBtn x-small class="ml-5 mr-1" icon v-on="on">
-              <VAvatar color="white" size="40"> </VAvatar>
+            <VBtn
+              width="40"
+              height="40"
+              :style="{ padding: 0, 'min-width': '40px !important' }"
+              light
+              x-small
+              class="ml-5"
+              v-on="on"
+            >
+              <img src="@/assets/img/settings.svg" alt="settings" />
             </VBtn>
           </template>
           <VCard light>

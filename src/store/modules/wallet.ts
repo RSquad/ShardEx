@@ -1,6 +1,5 @@
 import { Getters, Mutations, Actions, Module, createMapper } from "vuex-smart-module";
 import { defaultNetworks } from "./networks";
-
 export type Network = "http://0.0.0.0" | "http://net.ton.dev" | "http://main.ton.dev";
 class WalletState {
   isStoreRestored = false;
