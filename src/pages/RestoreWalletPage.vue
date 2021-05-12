@@ -453,7 +453,10 @@ export default class RestoreWalletPage extends Mappers {
         this.$router.push("/");
       } else {
         this.showTypePasswordModal().then(async (result: any) => {
-          const keypair = await getKeypair();
+          const keypair = {
+            public: this.publicKey,
+            secret: this.secretKey,
+          };
           await this.addAccount({
             keypair,
             custodians,

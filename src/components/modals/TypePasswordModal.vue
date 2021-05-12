@@ -15,6 +15,7 @@
             autocomplete="off"
             v-model.trim="password"
             clearable
+            autofocus
             :rules="[
               (v) => !!v || 'Password is required',
               (v) => validatePassword(v),
