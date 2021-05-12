@@ -125,6 +125,7 @@
           outlined
           label="Custodian"
           :rules="[(v) => !!`${v}` || 'Custodian is required']"
+          hint="'0x' + Public key"
         >
           <template v-slot:append>
             <div class="v-add-account-page__btn-inner">

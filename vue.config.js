@@ -42,6 +42,7 @@ module.exports = {
     //   entry: "./src/injection.ts",
     // },
   },
+
   pluginOptions: {
     browserExtension: {
       componentOptions: {

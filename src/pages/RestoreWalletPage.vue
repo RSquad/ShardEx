@@ -90,6 +90,18 @@
               : !isEmpty(keyPairTips) && publicKey && secretKey
           "
         >
+          <div class="d-flex align-center justify-space-between mb-5">
+            <h2>Custodians: {{ custodians.length }}</h2>
+            <VBtn
+              min-width="30"
+              :style="{ padding: 0 }"
+              x-small
+              @click="addNewField(custodians.length)"
+              color="primary"
+            >
+              <VIcon small> mdi-plus-thick</VIcon>
+            </VBtn>
+          </div>
           <VTextField
             autocomplete="off"
             dense
@@ -99,39 +111,30 @@
             outlined
             label="Custodian"
             :rules="[(v) => !!`${v}` || 'Custodian is required']"
+            hint="'0x' + Public key"
           >
             <template v-slot:append>
-              <VBtn
-                x-small
-                v-clipboard="() => custodian"
-                height="22"
-                color="primary"
-                class="mr-1"
-              >
-                Copy
-              </VBtn>
-              <VBtn
-                x-small
-                @click="deleteByIndex(index)"
-                v-if="index !== 0"
-                plain
-                icon
-                height="22"
-                color="red"
-              >
-                <VIcon>mdi-minus</VIcon>
-              </VBtn>
-              <VBtn
-                x-small
-                v-if="index === custodians.length - 1"
-                @click="addNewField(custodians.length)"
-                plain
-                icon
-                height="22"
-                color="green"
-              >
-                <VIcon>mdi-plus</VIcon>
-              </VBtn>
+              <div class="v-restore-wallet-page__btn-inner">
+                <VBtn
+                  min-width="30"
+                  :style="{ padding: 0 }"
+                  x-small
+                  v-clipboard="() => custodian"
+                  color="primary"
+                >
+                  <VIcon small> mdi-content-copy</VIcon>
+                </VBtn>
+                <VBtn
+                  min-width="30"
+                  :style="{ padding: 0 }"
+                  x-small
+                  @click="deleteByIndex(index)"
+                  v-if="index !== 0"
+                  class="ml-1"
+                >
+                  <VIcon small> mdi-close</VIcon>
+                </VBtn>
+              </div>
             </template>
           </VTextField>
         </div>
@@ -433,11 +436,11 @@ export default class RestoreWalletPage extends Mappers {
       }
     }
     if (this.restoryType === "keypair") {
+      const keypair = {
+        public: this.publicKey,
+        secret: this.secretKey,
+      };
       if (this.accountsCount === 0) {
-        const keypair = {
-          public: this.publicKey,
-          secret: this.secretKey,
-        };
         await this.addAccount({
           keypair,
           custodians,
@@ -453,7 +456,6 @@ export default class RestoreWalletPage extends Mappers {
         this.$router.push("/");
       } else {
         this.showTypePasswordModal().then(async (result: any) => {
-          const keypair = await getKeypair();
           await this.addAccount({
             keypair,
             custodians,
@@ -474,3 +476,9 @@ export default class RestoreWalletPage extends Mappers {
 }
 </script>
 
+<style lang="sass" scoped>
+.v-restore-wallet-page
+  &__btn-inner
+    margin-top: -3px
+    margin-right: -7px
+</style>

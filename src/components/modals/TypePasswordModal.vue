@@ -12,9 +12,11 @@
         </VCardTitle>
         <VCardText class="pb-0">
           <VTextField
+            dense
             autocomplete="off"
             v-model.trim="password"
             clearable
+            autofocus
             :rules="[
               (v) => !!v || 'Password is required',
               (v) => validatePassword(v),
@@ -41,7 +43,7 @@
 <script lang="ts">
 import { sliceString } from "@/utils";
 import { validatePassword } from "@/utils/validation";
-import { Component, ModelSync, Prop, Vue } from "vue-property-decorator";
+import { Component, ModelSync, Prop, Vue, Watch } from "vue-property-decorator";
 
 @Component({ methods: { sliceString, validatePassword } })
 export default class TypePasswordModal extends Vue {
@@ -51,6 +53,11 @@ export default class TypePasswordModal extends Vue {
   password!: boolean;
 
   isHidePassword = true;
+
+  @Watch("isOpen")
+  onChange() {
+    this.isHidePassword = true;
+  }
 
   @Prop() isOpen: boolean;
   @Prop() resolvePromise: any;

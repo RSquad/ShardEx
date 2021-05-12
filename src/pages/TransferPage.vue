@@ -29,6 +29,7 @@
             (v) => !!`${v}` || 'Amount type is required',
             (v) => validateAmount(v),
           ]"
+          :hint="`Your balance: ${balance} TON`"
         ></VTextField>
 
         <VTextField
@@ -95,19 +96,18 @@ export default class TransferPage extends Mappers {
     if (this.activeAccountAddress) {
       const token = this.getTokenBySymbol(this.activeAccountAddress, "TON");
       if (token) {
-        return token.balance;
+        return baseToAssetAmount(token.balance, "TON", 3);
       }
     }
     return "";
   }
 
   validateAmount(v: string) {
-    const balance = baseToAssetAmount(this.balance, "TON", 3);
-    const isBalanceLessThenValue = new BigNumber(balance)
+    const isBalanceLessThenValue = new BigNumber(this.balance)
       .minus(0.011)
       .isLessThanOrEqualTo(v);
     if (isBalanceLessThenValue) {
-      return `Insufficient funds. Your balance ${balance}`;
+      return `Insufficient funds. Your balance ${this.balance}`;
     }
     return true;
   }
