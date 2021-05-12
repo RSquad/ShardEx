@@ -223,7 +223,7 @@ export default class Header extends Mappers {
 <style lang="sass" scoped>
 .v-app-bar
   &__logo
-    margin-right: 8px
+    margin-right: 16px
   &__select
     max-width: 200px
   &__list

@@ -8,10 +8,9 @@
         @submit.prevent="onSubmit"
       >
         <h1 class="mb-8">Unlock wallet</h1>
-        <h2 class="mb-8">Password</h2>
         <VTextField
           autocomplete="off"
-          class="mb-8"
+          class="mb-6"
           v-model.trim="password"
           clearable
           :rules="[
@@ -20,6 +19,7 @@
           ]"
           outlined
           label="Password"
+          dense
           :append-icon="
             isHidePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
           "
@@ -29,7 +29,13 @@
         ></VTextField>
 
         <div class="d-flex justify-center">
-          <VBtn x-small color="primary" type="submit" :disabled="!password">
+          <VBtn
+            width="100"
+            x-small
+            color="primary"
+            type="submit"
+            :disabled="!password"
+          >
             Unlock
           </VBtn>
         </div>

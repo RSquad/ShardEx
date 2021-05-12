@@ -12,6 +12,7 @@
         </VCardTitle>
         <VCardText class="pb-0">
           <VTextField
+            dense
             autocomplete="off"
             v-model.trim="password"
             clearable

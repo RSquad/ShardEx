@@ -56,7 +56,7 @@ export const store = createStore(root, {
         "keystore/removeKey",
         "keystore/saveKeyMut",
         "networks/addNetwork",
-        "wallet/setActiveAccountAddress",
+        // "wallet/setActiveAccountAddress",
         "wallet/setIsStoreRestored",
         "wallet/setNetwork",
       ],
