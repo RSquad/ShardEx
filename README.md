@@ -2,13 +2,11 @@
 
 ShardEx is a free, secure and multi-functional FreeTon wallet implemented as a browser add-on.
 
-## Documentation
-
 ## Technical stack
 
-browser extension: https://github.com/Kocal/vue-web-extension
-ui: https://github.com/vuetifyjs/vuetify
-extension storage: https://github.com/championswimmer/vuex-persist + https://developer.chrome.com/docs/extensions/reference/storage/
+- browser extension: https://github.com/Kocal/vue-web-extension
+- ui: https://github.com/vuetifyjs/vuetify
+- extension storage: https://github.com/championswimmer/vuex-persist + https://developer.chrome.com/docs/extensions/reference/storage/
 
 ## Features
 
