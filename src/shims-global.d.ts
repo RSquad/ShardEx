@@ -2,7 +2,7 @@ import { Browser } from "webextension-polyfill-ts";
 
 declare global {
   interface Window {
-    ton: {
+    shard_ex_ton: {
       request: (method: any, params: any) => any;
     };
   }

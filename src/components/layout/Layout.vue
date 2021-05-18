@@ -1,10 +1,10 @@
 <template>
   <v-app>
     <TypePasswordModal
-      v-model="password"
-      :isOpen="isTypePasswordModalOpen"
-      :resolvePromise="resolvePromise"
-      :rejectPromise="rejectPromise"
+      v-model="modelPassword"
+      :isOpen="isDialogShowing"
+      :resolvePromise="confirm"
+      :rejectPromise="cancel"
       :passwordErrors="passwordErrors"
     />
     <Header />
@@ -28,6 +28,7 @@ import { checkDeployStatus } from "@/ton/ton.utils";
 import { keystoreModuleMapper } from "@/store/modules/keystore";
 
 import "@/styles/font.sass";
+import { passwordModuleMapper } from "@/store/modules/password";
 
 const Mappers = Vue.extend({
   methods: {
@@ -35,6 +36,11 @@ const Mappers = Vue.extend({
     ...accountsModuleMapper.mapMutations([
       "updateBalanceByAddressMut",
       "addNetworkToAccount",
+    ]),
+    ...passwordModuleMapper.mapMutations([
+      "confirm",
+      "cancel",
+      "onPasswordChange",
     ]),
   },
   computed: {
@@ -48,6 +54,19 @@ const Mappers = Vue.extend({
       "getPrivateData",
       "getPublicKeyData",
     ]),
+    ...passwordModuleMapper.mapGetters([
+      "isDialogShowing",
+      "passwordErrors",
+      "password",
+    ]),
+    modelPassword: {
+      get() {
+        return this.password;
+      },
+      set(value: string) {
+        this.onPasswordChange(value);
+      },
+    },
   },
 });
 
@@ -59,16 +78,6 @@ export default class Layout extends Mappers {
   isAccountOrNetworkChanged = false;
 
   isMounted = false;
-
-  isTypePasswordModalOpen = false;
-
-  resolvePromise: any = null;
-  rejectPromise: any = null;
-
-  password = "";
-  passwordErrors: string[] = [];
-
-  @Provide() showTypePasswordModal = this._showTypePasswordModal;
 
   public get accountAndNetwork() {
     const { activeAccountAddress, activeNetworkServer } = this;
@@ -168,48 +177,6 @@ export default class Layout extends Mappers {
         symbol: "TON",
         client: tonService.client,
       });
-  }
-
-  @Watch("password")
-  onChangePassword() {
-    if (this.passwordErrors.length) {
-      this.passwordErrors = [];
-    }
-  }
-
-  _showTypePasswordModal(address?: string) {
-    return new Promise((resolve, reject) => {
-      this.isTypePasswordModalOpen = true;
-
-      this.resolvePromise = () => {
-        try {
-          if (address) {
-            const privateData = this.getPrivateData(address, this.password);
-            const keypair = {
-              public: this.getPublicKeyData(address),
-              secret: privateData.secret,
-            };
-            resolve({
-              password: this.password,
-              keypair,
-              seedPhrase: privateData.seedPhrase,
-            });
-          } else {
-            this.getPrivateData(this.getKeyIDs[0], this.password);
-            resolve({ password: this.password });
-          }
-          this.password = "";
-          this.isTypePasswordModalOpen = false;
-        } catch (error) {
-          this.passwordErrors = ["Invalid password"];
-        }
-      };
-
-      this.rejectPromise = () => {
-        reject(false);
-        this.isTypePasswordModalOpen = false;
-      };
-    });
   }
 }
 </script>

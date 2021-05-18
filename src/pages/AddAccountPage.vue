@@ -179,7 +179,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Inject, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import { KeyPair } from "@tonclient/core";
 import Inner from "@/components/layout/Inner.vue";
 import { convertSeedToKeyPair, generateSeed } from "@/ton/ton.utils";
@@ -194,6 +194,7 @@ import { isEmpty } from "lodash";
 import { rootModuleMapper } from "@/store/root";
 import TypePasswordModal from "@/components/modals/TypePasswordModal.vue";
 import { validatePassword } from "@/utils/validation";
+import { passwordModuleMapper } from "@/store/modules/password";
 
 const Mappers = Vue.extend({
   computed: {
@@ -206,6 +207,8 @@ const Mappers = Vue.extend({
   methods: {
     ...accountsModuleMapper.mapActions(["addAccount"]),
     ...rootModuleMapper.mapMutations(["setIsLocked"]),
+    ...passwordModuleMapper.mapActions(["askPassword"]),
+
     isEmpty,
     validatePassword,
   },
@@ -236,8 +239,6 @@ export default class CreateWalletPage extends Mappers {
       walletsTypes,
     };
   }
-
-  @Inject() showTypePasswordModal!: any;
 
   @Watch("password")
   onChangePassword() {
@@ -304,7 +305,7 @@ export default class CreateWalletPage extends Mappers {
       });
       this.$router.push("/");
     } else {
-      this.showTypePasswordModal().then(async (result: any) => {
+      this.askPassword().then(async (result: any) => {
         await this.addAccount({
           keypair,
           custodians,

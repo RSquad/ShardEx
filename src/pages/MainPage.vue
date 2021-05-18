@@ -163,7 +163,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Inject, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import Inner from "@/components/layout/Inner.vue";
 import DeployModal from "@/components/modals/DeployModal.vue";
 // @ts-ignore
@@ -190,6 +190,7 @@ import InsufficientFundsModal from "@/components/modals/InsufficientFundsModal.v
 import BigNumber from "bignumber.js";
 import { TxType } from "@/types/transactions";
 import { networksModuleMapper } from "@/store/modules/networks";
+import { passwordModuleMapper } from "@/store/modules/password";
 
 const Mappers = Vue.extend({
   computed: {
@@ -213,6 +214,7 @@ const Mappers = Vue.extend({
     ...keystoreModuleMapper.mapActions(["removeKey"]),
     getAccountExplorerLink,
     getTxExplorerLink,
+    ...passwordModuleMapper.mapActions(["askPassword"]),
   },
 });
 
@@ -234,8 +236,6 @@ export default class MainPage extends Mappers {
 
   isAccountDetailsModalOpen = false;
   isInsufficientFundsModalOpen = false;
-
-  @Inject() showTypePasswordModal!: any;
 
   txs: TxType[] = [];
 
@@ -331,7 +331,7 @@ export default class MainPage extends Mappers {
             this.$router.push("/transfer");
           }
         } else {
-          this.showTypePasswordModal(this.activeAccountAddress).then(
+          this.askPassword(this.activeAccountAddress).then(
             async (result: any) => {
               const deployModal: any = this.$refs.deployModal;
               await deployModal.onClickDeploy(result);

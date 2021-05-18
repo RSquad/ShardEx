@@ -69,6 +69,7 @@ import { tonService } from "@/background";
 import { TxPendingType } from "@/types/transactions";
 import { baseToAssetAmount, sliceString } from "@/utils";
 import { validateAddress } from "@/ton/ton.utils";
+import { passwordModuleMapper } from "@/store/modules/password";
 
 const Mappers = Vue.extend({
   computed: {
@@ -77,6 +78,8 @@ const Mappers = Vue.extend({
   },
   methods: {
     ...accountsModuleMapper.mapActions(["transferOrProposeTransfer"]),
+    ...passwordModuleMapper.mapActions(["askPassword"]),
+
     validateAddress,
   },
 });
@@ -201,10 +204,8 @@ export default class TransferPage extends Mappers {
     }
   }
 
-  @Inject() showTypePasswordModal!: any;
-
   async confirmTx() {
-    await this.showTypePasswordModal(this.activeAccountAddress).then(
+    await this.askPassword(this.activeAccountAddress).then(
       async (result: any) => {
         if (this.activeAccountAddress) {
           const account = this.getAccountByAddress(this.activeAccountAddress);

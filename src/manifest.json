@@ -16,6 +16,14 @@
     "scripts": ["js/background.js"],
     "persistent": false
   },
+  "content_scripts": [
+    {
+      "matches": ["file://*/*", "http://*/*", "https://*/*"],
+      "js": ["js/content-script.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
   "browser_action": {
     "default_popup": "popup.html",
     "default_title": "ShardEx",
@@ -23,5 +31,6 @@
       "19": "icons/19.png",
       "38": "icons/38.png"
     }
-  }
+  },
+  "web_accessible_resources": ["js/injection.js"]
 }

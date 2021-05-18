@@ -80,7 +80,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Inject, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import Inner from "@/components/layout/Inner.vue";
 import { accountsModuleMapper, contracts } from "@/store/modules/accounts";
 import { walletModuleMapper } from "@/store/modules/wallet";
@@ -90,6 +90,7 @@ import { assetToBaseAmount } from "@/utils";
 import Transfer from "@/contracts/Transfer";
 import { signerNone } from "@tonclient/core";
 import { validateAddress } from "@/ton/ton.utils";
+import { passwordModuleMapper } from "@/store/modules/password";
 
 const Mappers = Vue.extend({
   computed: {
@@ -98,6 +99,8 @@ const Mappers = Vue.extend({
   },
   methods: {
     ...accountsModuleMapper.mapActions(["transferOrProposeTransfer"]),
+    ...passwordModuleMapper.mapActions(["askPassword"]),
+
     validateAddress,
   },
 });
@@ -153,10 +156,8 @@ export default class TransferPage extends Mappers {
     }
   }
 
-  @Inject() showTypePasswordModal!: any;
-
   async proposeTx() {
-    await this.showTypePasswordModal(this.activeAccountAddress).then(
+    await this.askPassword(this.activeAccountAddress).then(
       async (result: any) => {
         if (this.activeAccountAddress) {
           const account = this.getAccountByAddress(this.activeAccountAddress);
