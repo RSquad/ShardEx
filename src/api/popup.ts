@@ -9,8 +9,8 @@ const _ = {
         .create({
           url: "index.html",
           type: "popup",
-          width: 310,
-          height: 536,
+          width: 357,
+          height: 600,
           left: position.x,
           top: position.y,
         })
@@ -44,7 +44,7 @@ const _ = {
     });
   },
   findPopup: async function() {
-    const popup = await StorageApi.get("popup");
+    const popup = store.getters["popupId"];
     if (null === popup) {
       return null;
     }
@@ -90,7 +90,7 @@ export default {
         position.y = Math.max(window.screenY, 0);
       }
       popup = await _.createPopup(position);
-      await StorageApi.set("popup", { id: popup.id });
+      store.commit("setPopupId", popup.id);
       return true;
     }
     return false;

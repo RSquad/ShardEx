@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import { createStore } from "vuex-smart-module";
 import { root } from "./root";
 // @ts-ignore
-import createMutationsSharer from "vuex-shared-mutations";
+import createMutationsSharer, { BroadcastChannelStrategy } from "vuex-shared-mutations";
 import VuexPersistence from "vuex-persist";
 
 Vue.use(Vuex);
@@ -59,7 +59,12 @@ export const store = createStore(root, {
         "wallet/setActiveAccountAddress",
         "wallet/setIsStoreRestored",
         "wallet/setNetwork",
+        "setPopupId",
+        "setIsLocked",
+        "tasks/createTaskMut",
+        "tasks/putTaskMut",
       ],
+      strategy: new BroadcastChannelStrategy(),
     }),
     vuexLocal.plugin,
   ],

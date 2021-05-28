@@ -8,7 +8,7 @@ s.onload = function() {
 };
 
 (document.head || document.documentElement).appendChild(s);
-const injectionStream = new PostMessageStream({ name: "content-script", target: "injection" });
+const injectionStream = new PostMessageStream({ name: "shard-ex-content-script", target: "shard-ex-injection" });
 
 injectionStream.on("data", (data) => {
   browser.runtime.sendMessage(data).then(function(response) {

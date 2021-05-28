@@ -1,6 +1,6 @@
 import PostMessageStream from "post-message-stream";
 
-const stream = new PostMessageStream({ name: "injection", target: "content-script" });
+const stream = new PostMessageStream({ name: "shard-ex-injection", target: "shard-ex-content-script" });
 const responses: any = [];
 
 const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

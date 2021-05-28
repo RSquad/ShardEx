@@ -7,6 +7,7 @@
       :rejectPromise="cancel"
       :passwordErrors="passwordErrors"
     />
+    <ConfirmTransactionModal />
     <Header />
     <v-main>
       <v-container fluid class="pa-0">
@@ -17,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Provide, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import Header from "@/components/layout/Header.vue";
 import { tonService } from "@/background";
 import { walletModuleMapper } from "@/store/modules/wallet";
@@ -29,6 +30,9 @@ import { keystoreModuleMapper } from "@/store/modules/keystore";
 
 import "@/styles/font.sass";
 import { passwordModuleMapper } from "@/store/modules/password";
+import ConfirmTransactionModal from "../modals/ConfirmTransactionModal.vue";
+import { Runtime } from "webextension-polyfill-ts";
+import { actionModuleMapper } from "@/store/modules/action";
 
 const Mappers = Vue.extend({
   methods: {
@@ -42,6 +46,7 @@ const Mappers = Vue.extend({
       "cancel",
       "onPasswordChange",
     ]),
+    ...actionModuleMapper.mapActions(["startTaskUpdating"]),
   },
   computed: {
     ...walletModuleMapper.mapGetters([
@@ -71,7 +76,7 @@ const Mappers = Vue.extend({
 });
 
 @Component({
-  components: { Header, TypePasswordModal },
+  components: { Header, TypePasswordModal, ConfirmTransactionModal },
 })
 export default class Layout extends Mappers {
   timeoutID: NodeJS.Timeout;
@@ -163,6 +168,7 @@ export default class Layout extends Mappers {
           });
         }
       }
+      this.startTaskUpdating();
     });
   }
 
