@@ -47,7 +47,8 @@ const _ = {
   updateTaskEndless: async function(commit, state) {
     try {
       const tasks = await BackgroundApi.request(requestInteractiveTasksTask);
-      store.commit("tasks/setTasks", tasks);
+      store.commit("action/setTasks", tasks);
+      console.log(tasks);
     } catch (err) {
       console.error(err);
     } finally {
@@ -65,7 +66,29 @@ class ActionState {
   tasks: any = {};
 }
 
-class ActionGetters extends Getters<ActionState> {}
+class ActionGetters extends Getters<ActionState> {
+  get isDialogShowing() {
+    return _.countTasks(this.state.tasks, true) > 0;
+  }
+  get currentTask() {
+    return _.findCurrentTask(this.state.tasks);
+  }
+  get activeTasksAmount() {
+    return _.countTasks(this.state.tasks, true);
+  }
+  get isCancelButtonEnabled() {
+    return _.hasCurrentTaskStatus(this.state.tasks, interactiveTaskStatus.new);
+  }
+  get isCancelButtonLoading() {
+    return _.hasCurrentTaskStatus(this.state.tasks, interactiveTaskStatus.cancellation);
+  }
+  get isApplyButtonEnabled() {
+    return _.hasCurrentTaskStatus(this.state.tasks, interactiveTaskStatus.new);
+  }
+  get isApplyButtonLoading() {
+    return _.hasCurrentTaskStatus(this.state.tasks, interactiveTaskStatus.process);
+  }
+}
 
 class ActionMutations extends Mutations<ActionState> {
   setTasks(tasks: any) {

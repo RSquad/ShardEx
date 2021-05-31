@@ -38,6 +38,7 @@ const handleMessage = async (request: any, sender: any) => {
     let task;
     if (isInternalRequest) {
       task = taskLib.compileInternalTaskByRequest(request);
+      console.log("isInternalRequest", task);
     } else {
       //@TODO site connection:  console.log({eventPageSender: sender});
       result.requestId = request.requestId;
@@ -57,6 +58,7 @@ const handleMessage = async (request: any, sender: any) => {
       result.data = isInternalRequest
         ? await taskLib.handleInternalTask(task)
         : await taskLib.handleExternalBackgroundTask(task);
+      console.log(result);
       result.code = 0;
     }
   } catch (e) {
@@ -64,7 +66,7 @@ const handleMessage = async (request: any, sender: any) => {
     result.code = 1;
     result.error = e.toString();
   }
-  // console.log({re
+  return result;
 };
 
 browser.runtime.onMessage.addListener(function(request: any, sender: Runtime.MessageSender): void {

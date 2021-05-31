@@ -84,8 +84,6 @@ class TasksActions extends Actions<TasksState, TasksGetters, TasksMutations, Tas
     return task;
   }
 
-  // async runTask() {}
-
   async updateTasks(tasks: any) {
     for (const i in tasks) {
       this.mutations.putTaskMut({ i, task: tasks[i] });

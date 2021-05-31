@@ -8,6 +8,8 @@
       :passwordErrors="passwordErrors"
     />
     <ConfirmTransactionModal />
+    <ActionDialog />
+
     <Header />
     <v-main>
       <v-container fluid class="pa-0">
@@ -31,7 +33,8 @@ import { keystoreModuleMapper } from "@/store/modules/keystore";
 import "@/styles/font.sass";
 import { passwordModuleMapper } from "@/store/modules/password";
 import ConfirmTransactionModal from "../modals/ConfirmTransactionModal.vue";
-import { Runtime } from "webextension-polyfill-ts";
+import ActionDialog from "../modals/ActionDialog.vue";
+
 import { actionModuleMapper } from "@/store/modules/action";
 
 const Mappers = Vue.extend({
@@ -64,6 +67,7 @@ const Mappers = Vue.extend({
       "passwordErrors",
       "password",
     ]),
+    ...actionModuleMapper.mapGetters(["currentTask"]),
     modelPassword: {
       get() {
         return this.password;
@@ -76,7 +80,12 @@ const Mappers = Vue.extend({
 });
 
 @Component({
-  components: { Header, TypePasswordModal, ConfirmTransactionModal },
+  components: {
+    Header,
+    TypePasswordModal,
+    ConfirmTransactionModal,
+    ActionDialog,
+  },
 })
 export default class Layout extends Mappers {
   timeoutID: NodeJS.Timeout;
@@ -95,6 +104,11 @@ export default class Layout extends Mappers {
       return account.networks.includes(this.activeNetworkServer);
     }
     return false;
+  }
+
+  @Watch("currentTask")
+  log() {
+    console.log(this.currentTask);
   }
 
   @Watch("accountAndNetwork")
