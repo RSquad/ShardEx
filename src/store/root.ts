@@ -10,7 +10,7 @@ import { tasks } from "./modules/tasks";
 import { action } from "./modules/action";
 
 class RootState {
-  isLocked = false;
+  isLocked = true;
   popupId = null;
 }
 

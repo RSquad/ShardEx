@@ -48,7 +48,6 @@ const _ = {
     try {
       const tasks = await BackgroundApi.request(requestInteractiveTasksTask);
       store.commit("action/setTasks", tasks);
-      console.log(tasks);
     } catch (err) {
       console.error(err);
     } finally {
@@ -126,7 +125,7 @@ class ActionActions extends Actions<ActionState, ActionGetters, ActionMutations,
       this.mutations.setTasks(tasks);
     });
   }
-  async apply({ interactiveTask, password }) {
+  async apply({ interactiveTask, password }: any): Promise<any> {
     this.mutations.setCurrentTaskCancellation();
     const form = this.state.tasks[interactiveTask.id].form;
     return BackgroundApi.request(applyInteractiveTaskTask, {

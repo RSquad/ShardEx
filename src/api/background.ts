@@ -1,5 +1,5 @@
 export default {
-  request: function(task: any, parameters = {}) {
+  request: function(task: any, parameters = {}): Promise<any> {
     const data = { method: task.name, data: parameters };
     return new Promise((resolve, reject) => {
       browser.runtime.sendMessage(data).then((response) => {

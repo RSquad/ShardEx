@@ -82,7 +82,6 @@ export default {
     }),
     ...mapGetters("wallet", ["isKeysEncrypted"]),
   },
-  watch: {},
   methods: {
     ...mapActions("action", ["cancel", "apply", "formChange"]),
     ...mapActions("password", {
@@ -92,16 +91,12 @@ export default {
       await this.$refs.form.validate();
       if (this.valid) {
         const applyData = { interactiveTask: this.task, password: null };
-        if (this.isKeysEncrypted) {
-          this.askPassword()
-            .then(async (password) => {
-              applyData.password = password;
-              await this.apply(applyData);
-            })
-            .catch(() => null);
-        } else {
-          await this.apply(applyData);
-        }
+        this.askPassword()
+          .then(async (data) => {
+            applyData.password = data.password;
+            await this.apply(applyData);
+          })
+          .catch(() => null);
       }
     },
   },

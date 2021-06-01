@@ -106,11 +106,6 @@ export default class Layout extends Mappers {
     return false;
   }
 
-  @Watch("currentTask")
-  log() {
-    console.log(this.currentTask);
-  }
-
   @Watch("accountAndNetwork")
   async onChangeAccount(val: {
     activeAccountAddress: string | undefined;

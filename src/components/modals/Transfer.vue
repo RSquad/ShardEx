@@ -5,10 +5,10 @@
     </div>
     <template v-if="!isCurrentAddress">
       <div class="text-body-1">From address:</div>
-      <addr :address="walletAddress" class="transfer__address" />
+      <div>{{ walletAddress }}</div>
     </template>
     <div class="text-body-1">To address:</div>
-    <addr :address="address" class="transfer__address" />
+    <div>{{ address }}</div>
     <div>{{ amountView }}</div>
   </div>
 </template>

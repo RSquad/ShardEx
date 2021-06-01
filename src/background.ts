@@ -29,36 +29,33 @@ const extensionId = browser.runtime.id;
 const handleMessage = async (request: any, sender: any) => {
   const result: any = {};
   try {
-    //@TODO make sure this check required
     if (extensionId !== sender.id) {
       throw "extensionId <> senderId";
     }
-    //@TODO make sure can check it like this
     const isInternalRequest = sender.origin === `chrome-extension://${extensionId}`;
     let task;
     if (isInternalRequest) {
       task = taskLib.compileInternalTaskByRequest(request);
-      console.log("isInternalRequest", task);
     } else {
-      //@TODO site connection:  console.log({eventPageSender: sender});
       result.requestId = request.requestId;
       task = taskLib.compileExternalTaskByRequest(request, sender.tab.id);
     }
 
     if (task.isInteractive) {
-      const interactiveTask = await taskLib.handleExternalInteractiveTask(task);
       await popupLib.callPopup();
+      await store.dispatch("waitLoggedIn");
+      const interactiveTask = await taskLib.handleExternalInteractiveTask(task);
+
       result.data = await taskLib.waitInteractiveTaskResolving(task, interactiveTask.id);
       result.code = 0;
     } else {
-      if (!isInternalRequest && !(await store.getters["isLoggedIn"])) {
+      if (!isInternalRequest && !store.getters["isLoggedIn"]) {
         await popupLib.callPopup();
         await store.dispatch("waitLoggedIn");
       }
       result.data = isInternalRequest
         ? await taskLib.handleInternalTask(task)
         : await taskLib.handleExternalBackgroundTask(task);
-      console.log(result);
       result.code = 0;
     }
   } catch (e) {

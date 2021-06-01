@@ -1,4 +1,4 @@
-import { transferTask } from "@/api/task/items";
+import { sendTransactionTask } from "@/api/task/items";
 import { interactiveTaskStatus } from "@/store/modules/tasks";
 import { store } from "../../store/index";
 import {
@@ -17,7 +17,7 @@ const taskList = {
   },
   external: {
     interactive: {
-      transferTask,
+      sendTransactionTask,
     },
     background: {},
   },

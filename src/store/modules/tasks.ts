@@ -28,7 +28,7 @@ export const interactiveTaskActiveStatusIds = [
 ];
 
 export const interactiveTaskType = {
-  transfer: 1,
+  sendTransaction: 1,
 };
 
 class TasksState {
@@ -78,6 +78,8 @@ class TasksActions extends Actions<TasksState, TasksGetters, TasksMutations, Tas
       data,
       params,
       statusId: interactiveTaskStatus.new,
+      error: null,
+      form: {},
     };
     task.id = this.state.list.length;
     this.mutations.createTaskMut(task);
@@ -89,6 +91,12 @@ class TasksActions extends Actions<TasksState, TasksGetters, TasksMutations, Tas
       this.mutations.putTaskMut({ i, task: tasks[i] });
     }
   }
+
+  // async makeProcessTasksUnknown() {
+
+  //   await db.interactiveTask.where("statusId").equals(interactiveTaskStatus.process)
+  //     .modify({statusId: interactiveTaskStatus.unknown});
+  // }
 }
 
 export const tasks = new Module({
