@@ -51,6 +51,7 @@ const _ = {
     const windows: any = await this.getAllWindows();
     for (const i in windows) {
       if (windows[i].id === popup.id) {
+        console.log(windows[i])
         return windows[i];
       }
     }
@@ -69,6 +70,7 @@ const _ = {
 export default {
   callPopup: async function(doCreateIfNotExists = true) {
     let popup = await _.findPopup();
+    console.log(popup);
     if (null !== popup) {
       const currentWindow = await _.getCurrentWindow();
       if (currentWindow.id === popup.id) {
@@ -90,7 +92,7 @@ export default {
         position.y = Math.max(window.screenY, 0);
       }
       popup = await _.createPopup(position);
-      store.commit("setPopupId", popup.id);
+      store.commit("setPopupId", { id: popup.id });
       return true;
     }
     return false;

@@ -6,6 +6,7 @@ import {
   saveFormInteractiveTaskTask,
   applyInteractiveTaskTask,
   cancelInteractiveTaskTask,
+  getAddressTask,
 } from "@/api/task/items";
 
 const taskList = {
@@ -19,7 +20,7 @@ const taskList = {
     interactive: {
       sendTransactionTask,
     },
-    background: {},
+    background: { getAddressTask },
   },
 };
 const _ = {
@@ -74,7 +75,7 @@ export default {
     if (await store.getters["tasks/isOneOfTaskByRequestIdCanceled"](task.requestId)) {
       throw new Error();
     }
-    const interactiveTask = await store.getters["tasks/getTask"](interactiveTaskId);
+    const interactiveTask = await store.dispatch("tasks/getTask", interactiveTaskId);
     if (interactiveTask.statusId === interactiveTaskStatus.performed) {
       return interactiveTask.result;
     }

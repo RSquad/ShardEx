@@ -335,6 +335,15 @@ export default class MainPage extends Mappers {
             async (result: any) => {
               const deployModal: any = this.$refs.deployModal;
               await deployModal.onClickDeploy(result);
+              if (action === "propose") {
+                this.$router.push("/propose-transaction");
+              }
+              if (action === "confirm") {
+                this.$router.push("/confirm-transaction");
+              }
+              if (action === "transfer") {
+                this.$router.push("/transfer");
+              }
             }
           );
         }

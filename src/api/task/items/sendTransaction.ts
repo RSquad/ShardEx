@@ -14,7 +14,7 @@ export default {
     if (undefined === task.data.walletAddress) {
       task.data.walletAddress = loggedWalletAddress;
     }
-    // const isItLoggedWalletAddress = walletLib.isAddressesMatch(loggedWalletAddress, task.data.walletAddress);
+    const isItLoggedWalletAddress = loggedWalletAddress === task.data.walletAddress;
     // if (isItLoggedWalletAddress && !(await walletLib.isContractDeployed(networkId))) {
     //   await interactiveTaskRepository.createTask(interactiveTaskType.deployWalletContract, networkId, task.requestId);
     // }
@@ -23,7 +23,7 @@ export default {
       networkServer,
       requestId: task.requestId,
       data: task.data,
-      // params: { isItLoggedWalletAddress },
+      params: { isItLoggedWalletAddress },
     });
   },
 };

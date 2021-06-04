@@ -5,7 +5,7 @@ export default {
   name: "cancelInteractiveTask",
   async handle(task: any) {
     const { interactiveTaskId } = task.data;
-    const interactiveTask = await store.getters["tasks/getTask"](interactiveTaskId);
+    const interactiveTask = await store.dispatch("tasks/getTask", interactiveTaskId);
     if (interactiveTask.statusId === interactiveTaskStatus.new) {
       let interactiveTasks = [];
       interactiveTasks = await store.getters["tasks/getActiveTasks"];
@@ -13,7 +13,7 @@ export default {
       for (const i in interactiveTasks) {
         interactiveTasks[i].statusId = interactiveTaskStatus.canceled;
       }
-      await store.dispatch("tasks/updateTasks", interactiveTasks);
+      store.dispatch("tasks/updateTasks", interactiveTasks);
     }
     return await store.getters["tasks/getAll"];
   },

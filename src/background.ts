@@ -24,6 +24,8 @@ store.subscribe((mutation) => {
   }
 });
 
+store.dispatch("tasks/makeProcessTasksUnknown");
+
 const extensionId = browser.runtime.id;
 
 const handleMessage = async (request: any, sender: any) => {
@@ -42,17 +44,16 @@ const handleMessage = async (request: any, sender: any) => {
     }
 
     if (task.isInteractive) {
-      await popupLib.callPopup();
-      await store.dispatch("waitLoggedIn");
       const interactiveTask = await taskLib.handleExternalInteractiveTask(task);
+      await popupLib.callPopup();
 
       result.data = await taskLib.waitInteractiveTaskResolving(task, interactiveTask.id);
       result.code = 0;
     } else {
-      if (!isInternalRequest && !store.getters["isLoggedIn"]) {
-        await popupLib.callPopup();
-        await store.dispatch("waitLoggedIn");
-      }
+      // if (!isInternalRequest && !store.getters["isLoggedIn"]) {
+      //   await popupLib.callPopup();
+      //   await store.dispatch("waitLoggedIn");
+      // }
       result.data = isInternalRequest
         ? await taskLib.handleInternalTask(task)
         : await taskLib.handleExternalBackgroundTask(task);

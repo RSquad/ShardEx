@@ -41,10 +41,6 @@ class TasksGetters extends Getters<TasksState> {
     return _.indexEntitiesByField(tasks, "id");
   }
 
-  get getTask(): (id: number) => any {
-    return (id: number) => this.state.list.find((task: any) => task.id === id);
-  }
-
   get isOneOfTaskByRequestIdCanceled() {
     return (requestId: string) => {
       const tasksNum = this.state.list.filter(
@@ -65,6 +61,7 @@ class TasksMutations extends Mutations<TasksState> {
   }
 
   putTaskMut({ i, task }: any) {
+    // this.state.list[i] = task;
     Vue.set(this.state.list, i, task);
   }
 }
@@ -86,17 +83,25 @@ class TasksActions extends Actions<TasksState, TasksGetters, TasksMutations, Tas
     return task;
   }
 
-  async updateTasks(tasks: any) {
+  getTask(id: number): any {
+    return this.state.list.find((task: any) => task.id === id);
+  }
+
+  updateTasks(tasks: any) {
     for (const i in tasks) {
       this.mutations.putTaskMut({ i, task: tasks[i] });
     }
   }
 
-  // async makeProcessTasksUnknown() {
-
-  //   await db.interactiveTask.where("statusId").equals(interactiveTaskStatus.process)
-  //     .modify({statusId: interactiveTaskStatus.unknown});
-  // }
+  makeProcessTasksUnknown() {
+    const tasks = this.state.list;
+    for (const i in tasks) {
+      if (tasks[i].statusId === interactiveTaskStatus.process) {
+        tasks[i].statusId = interactiveTaskStatus.unknown;
+      }
+      this.mutations.putTaskMut({ i, task: tasks[i] });
+    }
+  }
 }
 
 export const tasks = new Module({

@@ -10,12 +10,12 @@
         <VCardTitle>
           <h3>Deploy?</h3>
         </VCardTitle>
-        <v-card-text> </v-card-text>
-        <v-card-actions>
+        <VCardText> </VCardText>
+        <VCardActions>
           <VSpacer></VSpacer>
           <VBtn x-small text @click="rejectPromise"> No </VBtn>
           <VBtn x-small :loading="isPending" text type="submit"> Yes </VBtn>
-        </v-card-actions>
+        </VCardActions>
       </VForm>
     </VCard>
   </VDialog>

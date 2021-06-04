@@ -33,9 +33,10 @@ import { keystoreModuleMapper } from "@/store/modules/keystore";
 import "@/styles/font.sass";
 import { passwordModuleMapper } from "@/store/modules/password";
 import ConfirmTransactionModal from "../modals/ConfirmTransactionModal.vue";
-import ActionDialog from "../modals/ActionDialog.vue";
+import ActionDialog from "../modals/ActionModal.vue";
 
 import { actionModuleMapper } from "@/store/modules/action";
+import { rootModuleMapper } from "@/store/root";
 
 const Mappers = Vue.extend({
   methods: {
@@ -76,6 +77,7 @@ const Mappers = Vue.extend({
         this.onPasswordChange(value);
       },
     },
+    ...rootModuleMapper.mapGetters(["popupId"]),
   },
 });
 
@@ -104,6 +106,11 @@ export default class Layout extends Mappers {
       return account.networks.includes(this.activeNetworkServer);
     }
     return false;
+  }
+
+  @Watch("popupId")
+  lg(v) {
+    console.log(v);
   }
 
   @Watch("accountAndNetwork")
