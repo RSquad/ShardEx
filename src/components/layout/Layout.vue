@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Provide, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import Header from "@/components/layout/Header.vue";
 import { tonService } from "@/background";
 import { walletModuleMapper } from "@/store/modules/wallet";

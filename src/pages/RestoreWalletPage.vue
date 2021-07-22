@@ -207,7 +207,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Inject, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import Inner from "@/components/layout/Inner.vue";
 import {
   accountsModuleMapper,

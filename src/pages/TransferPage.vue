@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Inject, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import Inner from "@/components/layout/Inner.vue";
 import { accountsModuleMapper } from "@/store/modules/accounts";
 import { walletModuleMapper } from "@/store/modules/wallet";
