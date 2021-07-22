@@ -103,14 +103,7 @@ import { keystoreModuleMapper } from "@/store/modules/keystore";
 import { passwordModuleMapper } from "@/store/modules/password";
 import { walletModuleMapper } from "@/store/modules/wallet";
 import { sliceString } from "@/utils";
-import {
-  Component,
-  Inject,
-  Prop,
-  VModel,
-  Vue,
-  Watch,
-} from "vue-property-decorator";
+import { Component, Prop, VModel, Vue, Watch } from "vue-property-decorator";
 
 const Mappers = Vue.extend({
   computed: {
