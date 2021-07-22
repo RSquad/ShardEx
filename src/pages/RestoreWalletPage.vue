@@ -223,6 +223,7 @@ import { KeyPair } from "@tonclient/core";
 import { isEmpty } from "lodash";
 import TypePasswordModal from "@/components/modals/TypePasswordModal.vue";
 import { validatePassword } from "@/utils/validation";
+import { passwordModuleMapper } from "@/store/modules/password";
 
 const Mappers = Vue.extend({
   computed: {
@@ -236,6 +237,7 @@ const Mappers = Vue.extend({
     ...accountsModuleMapper.mapActions(["addAccount"]),
     ...accountsModuleMapper.mapMutations(["addNetworkToAccount"]),
     ...walletModuleMapper.mapMutations(["setActiveAccountAddress"]),
+    ...passwordModuleMapper.mapActions(["askPassword"]),
   },
 });
 
@@ -270,8 +272,6 @@ export default class RestoreWalletPage extends Mappers {
       walletsTypes,
     };
   }
-
-  @Inject() showTypePasswordModal!: any;
 
   public get onChangeFields() {
     const {
@@ -417,7 +417,7 @@ export default class RestoreWalletPage extends Mappers {
         });
         this.$router.push("/");
       } else {
-        this.showTypePasswordModal().then(async (result: any) => {
+        this.askPassword().then(async (result: any) => {
           const keypair = await getKeypair();
           await this.addAccount({
             keypair,
@@ -455,7 +455,7 @@ export default class RestoreWalletPage extends Mappers {
         });
         this.$router.push("/");
       } else {
-        this.showTypePasswordModal().then(async (result: any) => {
+        this.askPassword().then(async (result: any) => {
           await this.addAccount({
             keypair,
             custodians,

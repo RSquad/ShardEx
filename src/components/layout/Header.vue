@@ -126,6 +126,7 @@ import { isEmpty } from "lodash";
 import { Component, Inject, Vue } from "vue-property-decorator";
 import Inner from "@/components/layout/Inner.vue";
 import { rootModuleMapper } from "@/store/root";
+import { passwordModuleMapper } from "@/store/modules/password";
 const Mappers = Vue.extend({
   methods: {
     ...walletModuleMapper.mapMutations([
@@ -138,6 +139,8 @@ const Mappers = Vue.extend({
     ]),
     ...accountsModuleMapper.mapActions(["addAccount"]),
     ...keystoreModuleMapper.mapMutations(["removeKey", "removeAllKey"]),
+    ...passwordModuleMapper.mapActions(["askPassword"]),
+
     isEmpty,
   },
   computed: {
@@ -176,12 +179,10 @@ export default class Header extends Mappers {
     }
   }
 
-  @Inject() showTypePasswordModal!: any;
-
   @Inject() isPopup!: boolean;
 
   onClickEasyAdd() {
-    this.showTypePasswordModal().then(async (result: any) => {
+    this.askPassword().then(async (result: any) => {
       const seedPhrase: any = await generateSeed(tonService.client, 12);
       const keypair = await convertSeedToKeyPair(
         tonService.client,
@@ -205,7 +206,7 @@ export default class Header extends Mappers {
   }
 
   onClickResetWallet() {
-    this.showTypePasswordModal().then(() => {
+    this.askPassword().then(() => {
       this.deleteAllAccounts();
       this.removeAllKey();
       this.setActiveAccountAddress(undefined);

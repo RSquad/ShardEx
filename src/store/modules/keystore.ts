@@ -63,8 +63,14 @@ class KeystoreGetters extends Getters<KeystoreState> {
   get getPublicKeyData(): (keyID: string) => string {
     return (keyID: any) => this.state.keys[keyID].public;
   }
-  get getPrivateData(): (keyID: string, password: string) => { secret: string; seedPhrase: string } {
-    return (keyID: string, password: string) =>
+  get getPrivateData(): ({
+    keyID,
+    password,
+  }: {
+    keyID: string;
+    password: string;
+  }) => { secret: string; seedPhrase: string } {
+    return ({ keyID, password }: { keyID: string; password: string }) =>
       decrypt(this.state.keys[keyID].private, this.state.keys[keyID].metadata, password) as {
         secret: string;
         seedPhrase: string;
@@ -129,12 +135,11 @@ class KeystoreActions extends Actions<KeystoreState, KeystoreGetters, KeystoreMu
     this.mutations.removeKey(keyID);
   }
 
-
   public changePassword({ password, newPassword }: { password: string; newPassword: string }) {
     this.getters.getKeyIDs.forEach((keyID: string) => {
       try {
-        const publicData = this.getters.getPublicKeyData(keyID)
-        const privateData = this.getters.getPrivateData(keyID, password)
+        const publicData = this.getters.getPublicKeyData(keyID);
+        const privateData = this.getters.getPrivateData({ keyID, password });
 
         const metadata = {
           nonce: randomNonce(),
@@ -147,9 +152,9 @@ class KeystoreActions extends Actions<KeystoreState, KeystoreGetters, KeystoreMu
           privateData: encrypt(privateData, metadata, newPassword),
         });
       } catch (error) {
-        throw new Error("Invalid password")
+        throw new Error("Invalid password");
       }
-    })
+    });
   }
 }
 

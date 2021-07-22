@@ -100,6 +100,7 @@ import {
   accountsModuleMapper,
 } from "@/store/modules/accounts";
 import { keystoreModuleMapper } from "@/store/modules/keystore";
+import { passwordModuleMapper } from "@/store/modules/password";
 import { walletModuleMapper } from "@/store/modules/wallet";
 import { sliceString } from "@/utils";
 import {
@@ -113,7 +114,7 @@ import {
 
 const Mappers = Vue.extend({
   computed: {
-    ...keystoreModuleMapper.mapGetters(["getPrivateData", "getPublicKeyData"]),
+    ...keystoreModuleMapper.mapGetters(["getPublicKeyData"]),
     ...accountsModuleMapper.mapGetters(["accountNameByAddress"]),
     ...walletModuleMapper.mapGetters(["activeAccountAddress"]),
     modelAccountName: {
@@ -130,6 +131,7 @@ const Mappers = Vue.extend({
   },
   methods: {
     ...accountsModuleMapper.mapMutations(["changeAccountName"]),
+    ...passwordModuleMapper.mapActions(["askPassword"]),
   },
 });
 
@@ -138,8 +140,6 @@ export default class AccountDetailsModal extends Mappers {
   @VModel() model: boolean;
   @Prop() account: AccountInterface;
   valid = true;
-
-  @Inject() showTypePasswordModal!: any;
 
   secretKey = "";
   seedPhrase = "";
@@ -152,19 +152,15 @@ export default class AccountDetailsModal extends Mappers {
   }
 
   onClickExportSeedPhrase() {
-    this.showTypePasswordModal(this.activeAccountAddress).then(
-      async (result: any) => {
-        this.seedPhrase = result.seedPhrase;
-      }
-    );
+    this.askPassword(this.activeAccountAddress).then(async (result: any) => {
+      this.seedPhrase = result.seedPhrase;
+    });
   }
 
   onClickExportSecretPhrase() {
-    this.showTypePasswordModal(this.activeAccountAddress).then(
-      async (result: any) => {
-        this.secretKey = result.keypair.secret;
-      }
-    );
+    this.askPassword(this.activeAccountAddress).then(async (result: any) => {
+      this.secretKey = result.keypair.secret;
+    });
   }
 
   @Watch("model")

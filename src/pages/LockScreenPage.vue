@@ -81,7 +81,10 @@ export default class LockScreenPage extends Mappers {
 
   onSubmit() {
     try {
-      this.getPrivateData(this.getKeyIDs[0], this.password);
+      this.getPrivateData({
+        keyID: this.getKeyIDs[0],
+        password: this.password,
+      });
       this.setIsLocked(false);
       this.$router.push("/");
     } catch (error) {

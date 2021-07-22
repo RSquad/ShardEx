@@ -67,6 +67,7 @@ import { walletModuleMapper } from "@/store/modules/wallet";
 import { tonService } from "@/background";
 import { assetToBaseAmount, baseToAssetAmount } from "@/utils";
 import BigNumber from "bignumber.js";
+import { passwordModuleMapper } from "@/store/modules/password";
 
 const Mappers = Vue.extend({
   computed: {
@@ -75,6 +76,7 @@ const Mappers = Vue.extend({
   },
   methods: {
     ...accountsModuleMapper.mapActions(["transferOrProposeTransfer"]),
+    ...passwordModuleMapper.mapActions(["askPassword"]),
   },
 });
 
@@ -89,8 +91,6 @@ export default class TransferPage extends Mappers {
   address = "";
   amount = "";
   message = "";
-
-  @Inject() showTypePasswordModal!: any;
 
   public get balance(): string {
     if (this.activeAccountAddress) {
@@ -113,23 +113,21 @@ export default class TransferPage extends Mappers {
   }
 
   async onSubmit() {
-    this.showTypePasswordModal(this.activeAccountAddress).then(
-      async (result: any) => {
-        if (this.activeAccountAddress) {
-          this.isPending = true;
-          await this.transferOrProposeTransfer({
-            addressFrom: this.activeAccountAddress,
-            addressTo: this.address,
-            amount: assetToBaseAmount(this.amount, "TON"),
-            client: tonService.client,
-            message: this.message,
-            keypair: result.keypair,
-          });
-          this.isPending = false;
-          this.$router.push("/");
-        }
+    this.askPassword(this.activeAccountAddress).then(async (result: any) => {
+      if (this.activeAccountAddress) {
+        this.isPending = true;
+        await this.transferOrProposeTransfer({
+          addressFrom: this.activeAccountAddress,
+          addressTo: this.address,
+          amount: assetToBaseAmount(this.amount, "TON"),
+          client: tonService.client,
+          message: this.message,
+          keypair: result.keypair,
+        });
+        this.isPending = false;
+        this.$router.push("/");
       }
-    );
+    });
   }
 }
 </script>

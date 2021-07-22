@@ -4,6 +4,7 @@ import { accounts } from "./modules/accounts";
 import { networks } from "./modules/networks";
 import { wallet } from "./modules/wallet";
 import { keystore } from "./modules/keystore";
+import { password } from "./modules/password";
 
 class RootState {
   isLocked = true;
@@ -32,6 +33,7 @@ export const root = new Module({
     networks,
     wallet,
     keystore,
+    password,
   },
 });
 
