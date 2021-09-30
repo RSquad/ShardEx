@@ -1,0 +1,14 @@
+{
+	"createOrRestoreAccount": "Create or restore account",
+	"easyAdd": "Easy Add",
+	"add": "Add",
+	"restore": "Restore",
+	"addWallet": "Add wallet",
+	"name": "Name",
+	"nameIsRequired": "Name is required",
+	"walletType": "Wallet type",
+	"worldCount": "World count",
+	"worldCountRequired": "World count type is required",
+	"passwordRequired": "Password is required",
+	"password": "Password"
+}

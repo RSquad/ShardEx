@@ -47,14 +47,16 @@ module.exports = {
     browserExtension: {
       componentOptions: {
         background: {
-          entry: "src/background.ts",
-        },
-        // contentScripts: {
-        //   entries: {
-        //     "content-script": ["src/content-script.ts"],
-        //   },
-        // },
-      },
+          entry: 'src/background.ts'
+        }
+      }
     },
+    i18n: {
+      locale: 'en',
+      fallbackLocale: 'en',
+      localeDir: 'locales',
+      enableInSFC: false,
+      enableBridge: false
+    }
   },
 };
