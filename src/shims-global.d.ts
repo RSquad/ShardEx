@@ -1,10 +1,5 @@
-import { Browser } from "webextension-polyfill-ts";
+import { Browser } from "@types/webextension-polyfill";
 
 declare global {
-  interface Window {
-    shard_ex_ton: {
-      request: (method: any, params: any) => any;
-    };
-  }
   declare const browser: Browser;
 }
