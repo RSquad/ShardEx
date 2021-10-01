@@ -79,5 +79,6 @@
   "create": "Create",
   "restoryType": "Restory type",
   "keypair": "Keypair",
-  "publicKeyRequired": "Public key is required"
+  "publicKeyRequired": "Public key is required",
+  "resetAccount": "Reset accounts"
 }

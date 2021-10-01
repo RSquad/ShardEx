@@ -79,5 +79,6 @@
   "create": "Создать",
   "restoryType": "Тип восстановления",
   "keypair": "Пара ключей",
-  "publicKeyRequired": "Публичный ключ обязателен"
+  "publicKeyRequired": "Публичный ключ обязателен",
+  "resetAccount": "Сбросить аккаунты"
 }

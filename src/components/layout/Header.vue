@@ -114,7 +114,7 @@
               </VListItem>
               <VListItem @click="onClickResetWallet">
                 <VListItemContent>
-                  <VListItemTitle>{{ $t("restoreAccount") }}</VListItemTitle>
+                  <VListItemTitle>{{ $t("resetAccount") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
             </VList>

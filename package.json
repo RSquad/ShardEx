@@ -1,6 +1,6 @@
 {
   "name": "shard-ex",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "description": "ShardEx is a free, secure and multi-functional FreeTon wallet implemented as a browser add-on.",
   "author": {
