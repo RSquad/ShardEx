@@ -9,7 +9,7 @@
     <Inner>
       <div class="d-flex align-center justify-space-between mb-5">
         <h1>
-          Account
+          {{ $t("account") }}
           <VBtn
             v-if="activeNetworkServer === 'http://0.0.0.0'"
             x-small
@@ -34,7 +34,7 @@
           </template>
           <VList nav>
             <VListItem @click="isAccountDetailsModalOpen = true">
-              <VListItemTitle>account details</VListItemTitle>
+              <VListItemTitle>{{ $t("accountDetails") }}</VListItemTitle>
             </VListItem>
             <VListItem
               v-if="activeNetworkServer !== 'http://0.0.0.0'"
@@ -42,10 +42,10 @@
               :href="explorerLink"
               target="_blank"
             >
-              <VListItemTitle>explorer</VListItemTitle>
+              <VListItemTitle>{{ $t("explorer") }}</VListItemTitle>
             </VListItem>
             <VListItem @click="onClickDeleteAccount">
-              <VListItemTitle>delete</VListItemTitle>
+              <VListItemTitle>{{ $t("delete") }}</VListItemTitle>
             </VListItem>
           </VList>
         </VMenu>
@@ -83,23 +83,23 @@
                 </template>
               </VBtn>
             </template>
-            <span>Copy to clipboard</span>
+            <span>{{ $t("copyToClipboard") }}</span>
           </VTooltip>
         </v-img>
       </VCard>
       <div class="v-main-page__buttons-row mb-5">
-        <VBtn x-small @click="action('transfer')" color="primary"
-          >Send transaction</VBtn
-        >
-        <VBtn color="primary" x-small @click="action('propose')"
-          >Propose transaction</VBtn
-        >
-        <VBtn color="primary" x-small @click="action('confirm')"
-          >Confirm transaction</VBtn
-        >
+        <VBtn x-small @click="action('transfer')" color="primary">{{
+          $t("sendTransaction")
+        }}</VBtn>
+        <VBtn color="primary" x-small @click="action('propose')">{{
+          $t("proposeTransaction")
+        }}</VBtn>
+        <VBtn color="primary" x-small @click="action('confirm')">{{
+          $t("confirmTransaction")
+        }}</VBtn>
       </div>
 
-      <h1 class="mb-4">Transactions</h1>
+      <h1 class="mb-4">{{ $t("transactions") }}</h1>
 
       <VDataTable
         :loading="isTxsPendins"
@@ -148,7 +148,7 @@
                     {{ item.fId }}
                   </a>
                 </template>
-                <span>Explorer link</span>
+                <span>{{ $t("explorerLink") }}</span>
               </VTooltip>
             </td>
             <td>

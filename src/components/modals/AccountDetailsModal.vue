@@ -2,21 +2,21 @@
   <VDialog light :retain-focus="false" v-model="model" max-width="325px">
     <VCard>
       <VCardTitle>
-        <h3>Account details</h3>
+        <h3>{{ $t("AccountDetails") }}</h3>
       </VCardTitle>
       <VCardText>
         <VTextField
           autocomplete="off"
           v-model.trim="modelAccountName"
           clearable
-          :rules="[(v) => !!v || 'Name is required']"
+          :rules="[(v) => !!v || $t('nameIsRequired')]"
           outlined
-          label="Name"
+          :label="$t('name')"
         >
         </VTextField>
-        <h4>Wallet type</h4>
+        <h4>{{ $t("walletType") }}</h4>
         <div class="mb-4">{{ account && account.walletType }}</div>
-        <h4>Public key</h4>
+        <h4>{{ $t("publicKey") }}</h4>
         <div class="d-flex justify-space-between align-center mb-4">
           {{ sliceString(publicKey, 12) }}
           <VBtn
@@ -29,7 +29,7 @@
             <VIcon> mdi-content-copy </VIcon>
           </VBtn>
         </div>
-        <h4>Custodians</h4>
+        <h4>{{ $t("custodians") }}</h4>
         <div>
           <div
             v-for="(custodian, i) in account.custodians"
@@ -56,7 +56,7 @@
             width="100%"
             color="primary"
           >
-            Export Seed Phrase</VBtn
+            {{ $t("exportSeedPhrase") }}</VBtn
           >
           <VTextarea
             v-if="seedPhrase"
@@ -66,7 +66,7 @@
             rows="3"
             readonly
             hide-details
-            label="Seed Phrase"
+            :label="$t('seedPhrase')"
           ></VTextarea>
         </div>
         <VBtn
@@ -77,7 +77,7 @@
           color="primary"
           class="mt-4"
         >
-          Export Secret Key</VBtn
+          {{ $t("exportSecretKey") }}</VBtn
         >
         <VTextarea
           v-if="secretKey"
@@ -87,7 +87,7 @@
           rows="3"
           hide-details
           readonly
-          label="Secret Key"
+          :label="$t('secretKey')"
           class="mt-4"
         ></VTextarea>
       </VCardText>

@@ -7,16 +7,16 @@
         lazy-validation
         @submit.prevent="confirmTx"
       >
-        <h1 class="mb-5">Confirm transaction</h1>
+        <h1 class="mb-5">{{ $t("confirmTransaction") }}</h1>
         <VTextField
           autocomplete="off"
           dense
           v-model="address"
           clearable
           outlined
-          label="Address"
+          :label="$t('address')"
           :rules="[
-            (v) => !!v || 'Address is required',
+            (v) => !!v || $t('addressRequired'),
             (v) => validateAddress(v) || 'invalid address format',
           ]"
         ></VTextField>
@@ -42,7 +42,7 @@
         </VDataTable>
         <div class="d-flex justify-end">
           <VBtn color="white" light x-small width="80" to="/" class="mr-4">
-            Back
+            {{ $t("back") }}
           </VBtn>
           <VBtn
             x-small
@@ -51,7 +51,7 @@
             type="submit"
             color="primary"
             :disabled="!valid"
-            >Confirm
+            >{{ $t("confirm") }}
           </VBtn>
         </div>
       </VForm>
@@ -103,22 +103,22 @@ export default class TransferPage extends Mappers {
 
   headersPendingTxs = [
     {
-      text: "Creator",
+      text: this.$t("creator"),
       value: "fCreator",
       sortable: false,
     },
     {
-      text: "To",
+      text: this.$t("to"),
       value: "to",
       sortable: false,
     },
     {
-      text: "Amount",
+      text: this.$t("amount"),
       value: "fValue",
       sortable: false,
     },
     {
-      text: "Сonfirmation",
+      text: this.$t("confirmation"),
       value: "confirmation",
       sortable: false,
     },

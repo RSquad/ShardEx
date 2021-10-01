@@ -14,11 +14,6 @@ module.exports = {
           toType: "dir",
         },
       ]),
-      // new RemovePlugin({
-      //   after: {
-      //     include: ["./dist/injection.html"],
-      //   },
-      // }),
     ],
     output: {
       filename: "js/[name].js",
@@ -38,25 +33,22 @@ module.exports = {
       entry: "./src/standalone/main.ts",
       filename: "index.html",
     },
-    // injection: {
-    //   entry: "./src/injection.ts",
-    // },
   },
 
   pluginOptions: {
     browserExtension: {
       componentOptions: {
         background: {
-          entry: 'src/background.ts'
-        }
-      }
+          entry: "src/background.ts",
+        },
+      },
     },
     i18n: {
-      locale: 'en',
-      fallbackLocale: 'en',
-      localeDir: 'locales',
+      locale: "en",
+      fallbackLocale: "en",
+      localeDir: "locales",
       enableInSFC: false,
-      enableBridge: false
-    }
+      enableBridge: false,
+    },
   },
 };

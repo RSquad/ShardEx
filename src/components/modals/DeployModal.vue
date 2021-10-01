@@ -8,13 +8,15 @@
         @submit.prevent="resolvePromise"
       >
         <VCardTitle>
-          <h3>Deploy?</h3>
+          <h3>{{ $t("deploy") }}</h3>
         </VCardTitle>
         <v-card-text> </v-card-text>
         <v-card-actions>
           <VSpacer></VSpacer>
-          <VBtn x-small text @click="rejectPromise"> No </VBtn>
-          <VBtn x-small :loading="isPending" text type="submit"> Yes </VBtn>
+          <VBtn x-small text @click="rejectPromise"> {{ $t("no") }} </VBtn>
+          <VBtn x-small :loading="isPending" text type="submit">
+            {{ $t("yes") }}
+          </VBtn>
         </v-card-actions>
       </VForm>
     </VCard>

@@ -46,14 +46,14 @@
           <VCard light>
             <template v-if="!isEmpty(accounts)">
               <div class="d-flex justify-space-between align-center py-3 px-4">
-                <h2>Accounts</h2>
+                <h2>{{ $t("accounts") }}</h2>
                 <VTooltip v-if="isPopup" bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <VIcon @click="expandView" v-bind="attrs" v-on="on">
                       mdi-arrow-expand-all
                     </VIcon>
                   </template>
-                  <span>Expand view</span>
+                  <span>{{ $t("expandView") }}</span>
                 </VTooltip>
               </div>
               <v-divider></v-divider>
@@ -81,27 +81,27 @@
             <VList nav>
               <VListItem @click="onClickEasyAdd">
                 <VListItemContent>
-                  <VListItemTitle>Easy add account</VListItemTitle>
+                  <VListItemTitle>{{ $t("easyAddAccount") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
               <VListItem link to="/initialize/create">
                 <VListItemContent>
-                  <VListItemTitle>Add account</VListItemTitle>
+                  <VListItemTitle>{{ $t("addAccount") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
               <VListItem link to="/initialize/restore">
                 <VListItemContent>
-                  <VListItemTitle>Restore account</VListItemTitle>
+                  <VListItemTitle>{{ $t("restoreAccount") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
               <VListItem link to="/change-password">
                 <VListItemContent>
-                  <VListItemTitle>Change password</VListItemTitle>
+                  <VListItemTitle>{{ $t("changePassword") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
               <VListItem @click="onClickResetWallet">
                 <VListItemContent>
-                  <VListItemTitle>Reset wallet</VListItemTitle>
+                  <VListItemTitle>{{ $t("restoreAccount") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
             </VList>

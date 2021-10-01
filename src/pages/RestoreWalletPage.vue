@@ -16,14 +16,14 @@
           v-model="name"
           clearable
           outlined
-          label="Name"
-          :rules="[(v) => !!v || 'Name is required']"
+          :rules="[(v) => !!v || $t('nameIsRequired')]"
+          :label="$t('name')"
         ></VTextField>
         <VSelect
           dense
           v-model="walletType"
           :items="walletsTypes"
-          label="Wallet type"
+          :label="$t('walletType')"
           outlined
           :menu-props="{ 'offset-y': true, light: true }"
         ></VSelect>
@@ -145,11 +145,11 @@
           v-if="accountsCount === 0"
           v-model.trim="password"
           :rules="[
-            (v) => !!v || 'Password is required',
-            (v) => validatePassword(v),
+            (v) => !!v || $t('passwordRequired'),
+            (v) => validatePassword(v, $t('validatePassword')),
           ]"
           outlined
-          label="Password"
+          :label="$t('password')"
           :append-icon="
             isHidePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
           "
@@ -164,8 +164,8 @@
           v-if="accountsCount === 0"
           v-model.trim="confirmPassword"
           :rules="[
-            (v) => !!v || 'Confirm password is required',
-            (v) => password === v || 'Passwords don\'t match',
+            (v) => !!v || $t('confirmPasswordRequired'),
+            (v) => newPassword === v || 'Passwords don\'t match',
           ]"
           :append-icon="
             isHidePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
@@ -173,7 +173,7 @@
           @click:append="() => (isHidePassword = !isHidePassword)"
           :type="isHidePassword ? 'password' : 'text'"
           outlined
-          label="Confirm password"
+          :label="$t('confirmPassword')"
         ></VTextField>
         <div class="d-flex justify-end">
           <VBtn
@@ -185,7 +185,7 @@
             @click="$router.back()"
             class="mr-4"
           >
-            Back
+            {{ $t("back") }}
           </VBtn>
           <VBtn
             x-small
@@ -198,7 +198,7 @@
                 : !valid || !name || (!publicKey && !secretKey)
             "
           >
-            Restore
+            {{ $t("restore") }}
           </VBtn>
         </div>
       </VForm>

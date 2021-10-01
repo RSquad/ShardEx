@@ -7,13 +7,13 @@
         lazy-validation
         @submit.prevent="onSubmit"
       >
-        <h1 class="mb-5">Change password</h1>
+        <h1 class="mb-5">{{ $t("changePassword") }}</h1>
         <VTextField
           autocomplete="off"
           dense
           v-model.trim="oldPassword"
           clearable
-          :rules="[(v) => !!v || 'Old password is required']"
+          :rules="[(v) => !!v || $t('oldPasswordRequired')]"
           outlined
           :append-icon="
             isHidePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
@@ -21,7 +21,7 @@
           @click:append="() => (isHidePassword = !isHidePassword)"
           :type="isHidePassword ? 'password' : 'text'"
           :error-messages="passwordErrors"
-          label="Old password"
+          :label="$t('oldPassword')"
         ></VTextField>
         <VTextField
           autocomplete="off"
@@ -34,11 +34,11 @@
           @click:append="() => (isHidePassword = !isHidePassword)"
           :type="isHidePassword ? 'password' : 'text'"
           :rules="[
-            (v) => !!v || 'Password is required',
-            (v) => validatePassword(v),
+            (v) => !!v || $t('passwordRequired'),
+            (v) => validatePassword(v, $t('validatePassword')),
           ]"
           outlined
-          label="Password"
+          :label="$t('password')"
         ></VTextField>
         <VTextField
           autocomplete="off"
@@ -51,15 +51,15 @@
           v-model.trim="confirmNewPassword"
           clearable
           :rules="[
-            (v) => !!v || 'Confirm password is required',
-            (v) => newPassword === v || 'Passwords don\'t match',
+            (v) => !!v || $t('confirmPasswordRequired'),
+            (v) => newPassword === v || $t('passwordsDontMatch'),
           ]"
           outlined
-          label="Confirm password"
+          :label="$t('confirmPassword')"
         ></VTextField>
         <div class="d-flex justify-end">
           <VBtn x-small width="80" to="/" class="mr-4" light color="white">
-            Back
+            {{ $t("back") }}
           </VBtn>
           <VBtn
             x-small
@@ -68,7 +68,7 @@
             type="submit"
             :disabled="!oldPassword || !newPassword || !confirmNewPassword"
           >
-            Change
+            {{ $t("change") }}
           </VBtn>
         </div>
       </VForm>
@@ -125,7 +125,7 @@ export default class ChangePasswordPage extends Mappers {
       this.changePassword({ password: oldPassword, newPassword });
       this.$router.push("/");
     } catch (error) {
-      this.passwordErrors = ["Invalid password"];
+      this.passwordErrors = [this.$t("invalidPassword").toString()];
     }
   }
 }

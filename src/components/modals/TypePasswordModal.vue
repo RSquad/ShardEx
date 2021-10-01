@@ -8,7 +8,7 @@
         @submit.prevent="resolvePromise"
       >
         <VCardTitle>
-          <h3>Type your password</h3>
+          <h3>{{ $t("typeYourPassword") }}</h3>
         </VCardTitle>
         <VCardText class="pb-0">
           <VTextField
@@ -18,11 +18,11 @@
             clearable
             autofocus
             :rules="[
-              (v) => !!v || 'Password is required',
-              (v) => validatePassword(v),
+              (v) => !!v || $t('passwordRequired'),
+              (v) => validatePassword(v, $t('validatePassword')),
             ]"
             outlined
-            label="Password"
+            :label="$t('password')"
             :append-icon="
               isHidePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
             "
@@ -33,8 +33,10 @@
         ></VCardText>
         <v-card-actions>
           <VSpacer></VSpacer>
-          <VBtn x-small text @click="rejectPromise()"> Cancel </VBtn>
-          <VBtn x-small text type="submit"> Submit </VBtn>
+          <VBtn x-small text @click="rejectPromise()">
+            {{ $t("cancel") }}
+          </VBtn>
+          <VBtn x-small text type="submit"> {{ $t("submit") }} </VBtn>
         </v-card-actions>
       </VForm>
     </VCard>

@@ -15,7 +15,7 @@
           clearable
           outlined
           label="Address"
-          :rules="[(v) => !!v || 'Address is required']"
+          :rules="[(v) => !!v || $t('addressRequired')]"
         ></VTextField>
 
         <VTextField
@@ -43,7 +43,9 @@
         ></VTextField>
 
         <div class="d-flex justify-end">
-          <VBtn light x-small width="80" to="/" class="mr-4"> Back </VBtn>
+          <VBtn light x-small width="80" to="/" class="mr-4">
+            {{ $t("back") }}
+          </VBtn>
           <VBtn
             x-small
             width="80"
