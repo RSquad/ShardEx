@@ -170,7 +170,7 @@
             type="submit"
             :disabled="!valid || !name || isEmpty(custodians)"
           >
-            {{ $t("Add") }}
+            {{ $t("add") }}
           </VBtn>
         </div>
       </VForm>

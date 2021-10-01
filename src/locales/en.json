@@ -69,5 +69,8 @@
   "easyAddWallet": "Easy add wallet",
   "unlockWallet": "Unlock wallet",
   "unlock": "Unlock",
-  "validatePassword": "Your password must be 6-64 characters, and include at least one lowercase letter and a number."
+  "validatePassword": "Your password must be 6-64 characters, and include at least one lowercase letter and a number.",
+  "createTransfer": "Create transfer",
+  "yourBalance": "Your balance",
+  "create": "Create"
 }

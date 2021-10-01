@@ -7,14 +7,14 @@
         lazy-validation
         @submit.prevent="onSubmit"
       >
-        <h1 class="mb-5">Create transfer</h1>
+        <h1 class="mb-5">{{ $t("createTransfer") }}</h1>
         <VTextField
           autocomplete="off"
           dense
           v-model="address"
           clearable
           outlined
-          label="Address"
+          :label="$t('address')"
           :rules="[(v) => !!v || $t('addressRequired')]"
         ></VTextField>
 
@@ -24,12 +24,12 @@
           v-model.trim="amount"
           clearable
           outlined
-          label="Amount"
+          :label="$t('amount')"
           :rules="[
-            (v) => !!`${v}` || 'Amount type is required',
+            (v) => !!`${v}` || $t('amountTypeRequired'),
             (v) => validateAmount(v),
           ]"
-          :hint="`Your balance: ${balance} TON`"
+          :hint="`${$t('yourBalance')}: ${balance} TON`"
         ></VTextField>
 
         <VTextField
@@ -39,7 +39,7 @@
           v-model.trim="message"
           outlined
           hide-details
-          label="Message"
+          :label="$t('message')"
         ></VTextField>
 
         <div class="d-flex justify-end">
@@ -53,7 +53,7 @@
             color="primary"
             type="submit"
             :disabled="!valid"
-            >Create
+            >{{ $t("create") }}
           </VBtn>
         </div>
       </VForm>

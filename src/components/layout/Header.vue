@@ -7,6 +7,19 @@
         </RouterLink>
         <VSpacer />
         <VSelect
+          :items="languagesForSelect"
+          v-model="modelLanguage"
+          item-text="title"
+          item-value="value"
+          hide-details
+          dense
+          outlined
+          class="v-app-bar__lang-select"
+          background-color="#FFFFFF"
+          light
+          :menu-props="{ light: true, 'offset-y': true }"
+        />
+        <VSelect
           :items="networksForSelect"
           v-model="modelNetwork"
           item-text="title"
@@ -123,7 +136,7 @@ import { walletModuleMapper } from "@/store/modules/wallet";
 import { convertSeedToKeyPair, generateSeed } from "@/ton/ton.utils";
 
 import { isEmpty } from "lodash";
-import { Component, Inject, Vue } from "vue-property-decorator";
+import { Component, Inject, Vue, Watch } from "vue-property-decorator";
 import Inner from "@/components/layout/Inner.vue";
 import { rootModuleMapper } from "@/store/root";
 import { passwordModuleMapper } from "@/store/modules/password";
@@ -173,6 +186,17 @@ const Mappers = Vue.extend({
 
 @Component({ components: { Inner } })
 export default class Header extends Mappers {
+  modelLanguage: "en" | "ru" = "en";
+  languagesForSelect = [
+    { title: "EN", value: "en" },
+    { title: "RU", value: "ru" },
+  ];
+
+  @Watch("modelLanguage")
+  onChangeLang(v: string) {
+    this.$root.$i18n.locale = v;
+  }
+
   onChange() {
     if (this.$route.path !== "/") {
       this.$router.push("/");
@@ -227,6 +251,8 @@ export default class Header extends Mappers {
     margin-right: 16px
   &__select
     max-width: 200px
+  &__lang-select
+    max-width: 75px !important
   &__list
     overflow-y: auto
 </style>
