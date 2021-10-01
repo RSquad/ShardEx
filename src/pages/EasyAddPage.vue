@@ -7,30 +7,30 @@
         lazy-validation
         @submit.prevent="onSubmit"
       >
-        <h1 class="mb-5">Easy add wallet</h1>
+        <h1 class="mb-5">{{ $t("easyAddWallet") }}</h1>
         <VTextField
           autocomplete="off"
           dense
           v-model.trim="password"
           :rules="[
-            (v) => !!v || 'Password is required',
-            (v) => validatePassword(v),
+            (v) => !!v || $t('passwordRequired'),
+            (v) => validatePassword(v, $t('validatePassword')),
           ]"
           outlined
+          :label="$t('password')"
           :append-icon="
             isHidePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
           "
           @click:append="() => (isHidePassword = !isHidePassword)"
           :type="isHidePassword ? 'password' : 'text'"
-          label="Password"
         ></VTextField>
         <VTextField
           autocomplete="off"
           dense
           v-model.trim="confirmPassword"
           :rules="[
-            (v) => !!v || 'Confirm password is required',
-            (v) => password === v || 'Passwords don\'t match',
+            (v) => !!v || $t('confirmPasswordRequired'),
+            (v) => newPassword === v || 'Passwords don\'t match',
           ]"
           outlined
           :append-icon="
@@ -38,7 +38,7 @@
           "
           @click:append="() => (isHidePassword = !isHidePassword)"
           :type="isHidePassword ? 'password' : 'text'"
-          label="Confirm password"
+          :label="$t('confirmPassword')"
         ></VTextField>
         <div class="d-flex justify-end">
           <VBtn
@@ -49,7 +49,7 @@
             color="white"
             light
           >
-            Back
+            {{ $t("back") }}
           </VBtn>
           <VBtn
             x-small
@@ -58,7 +58,7 @@
             type="submit"
             :disabled="!password || !confirmPassword"
           >
-            Add
+            {{ $t("Add") }}
           </VBtn>
         </div>
       </VForm>

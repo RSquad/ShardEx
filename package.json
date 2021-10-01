@@ -1,19 +1,8 @@
 {
   "name": "shard-ex",
-  "version": "0.1.4",
-  "description": "ShardEx is a free, secure and multi-functional FreeTon wallet implemented as a browser add-on.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/RSquad/ShardEx"
-  },
-  "license": "Apache-2.0",
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
+  "version": "0.1.5",
   "private": true,
+  "description": "ShardEx is a free, secure and multi-functional FreeTon wallet implemented as a browser add-on.",
   "author": {
     "name": "rsquad",
     "email": "hello@rrstd.ru",
@@ -24,7 +13,8 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
   "dependencies": {
     "@mdi/font": "^5.9.55",
@@ -39,6 +29,7 @@
     "tweetnacl-util": "^0.15.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
+    "vue-i18n": "^8.26.3",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.2.0",
     "vue2-timeago": "2.0.0",
@@ -82,8 +73,20 @@
     "typescript": "~3.9.3",
     "v-clipboard": "^2.2.3",
     "vue-cli-plugin-browser-extension": "latest",
+    "vue-cli-plugin-i18n": "~2.3.1",
     "vue-cli-plugin-vuetify": "~2.1.0",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.7.0"
+  },
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RSquad/ShardEx"
   }
 }

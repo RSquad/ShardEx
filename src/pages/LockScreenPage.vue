@@ -7,18 +7,18 @@
         lazy-validation
         @submit.prevent="onSubmit"
       >
-        <h1 class="mb-8">Unlock wallet</h1>
+        <h1 class="mb-8">{{ $t("unlockWallet") }}</h1>
         <VTextField
           autocomplete="off"
           class="mb-6"
           v-model.trim="password"
           clearable
           :rules="[
-            (v) => !!v || 'Password is required',
-            (v) => validatePassword(v),
+            (v) => !!v || $t('passwordRequired'),
+            (v) => validatePassword(v, $t('validatePassword')),
           ]"
           outlined
-          label="Password"
+          :label="$t('password')"
           dense
           :append-icon="
             isHidePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
@@ -36,7 +36,7 @@
             type="submit"
             :disabled="!password"
           >
-            Unlock
+            {{ $t("unlock") }}
           </VBtn>
         </div>
       </VForm></Inner
@@ -88,7 +88,7 @@ export default class LockScreenPage extends Mappers {
       this.setIsLocked(false);
       this.$router.push("/");
     } catch (error) {
-      this.passwordErrors = ["Invalid password"];
+      this.passwordErrors = [this.$t("invalidPassword").toString()];
     }
   }
 }

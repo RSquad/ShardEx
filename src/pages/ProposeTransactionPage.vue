@@ -7,17 +7,17 @@
         lazy-validation
         @submit.prevent="proposeTx"
       >
-        <h1 class="mb-5">Propose transaction</h1>
+        <h1 class="mb-5">{{ $t("proposeTransaction") }}</h1>
         <VTextField
           autocomplete="off"
           dense
           v-model="multiCustodianWalletAddress"
           clearable
           outlined
-          label="Multi custodian wallet address"
+          :label="$t('multiCustodianWalletAddress')"
           :rules="[
-            (v) => !!v || 'Address is required',
-            (v) => validateAddress(v) || 'invalid address format',
+            (v) => !!v || $t('addressRequired'),
+            (v) => validateAddress(v) || $t('invalidAddressFormat'),
           ]"
         ></VTextField>
 
@@ -27,10 +27,10 @@
           v-model="toAddress"
           clearable
           outlined
-          label="To address"
+          :label="$t('toAddress')"
           :rules="[
-            (v) => !!v || 'Address is required',
-            (v) => validateAddress(v) || 'invalid address format',
+            (v) => !!v || $t('addressRequired'),
+            (v) => validateAddress(v) || $t('invalidAddressFormat'),
           ]"
         ></VTextField>
 
@@ -40,8 +40,8 @@
           v-model.trim="amount"
           clearable
           outlined
-          label="Amount"
-          :rules="[(v) => !!`${v}` || 'Amount type is required']"
+          :label="$t('amount')"
+          :rules="[(v) => !!`${v}` || $t('amountTypeRequired')]"
         ></VTextField>
 
         <VTextField
@@ -51,12 +51,12 @@
           v-model.trim="message"
           outlined
           hide-details
-          label="Message"
+          :label="$t('message')"
         ></VTextField>
 
         <div class="d-flex justify-end">
           <VBtn color="white" light x-small width="80" to="/" class="mr-4">
-            Back
+            {{ $t("back") }}
           </VBtn>
           <VBtn
             x-small
@@ -71,7 +71,7 @@
               !amount ||
               !message
             "
-            >Propose
+            >{{ $t("propose") }}
           </VBtn>
         </div>
       </VForm>
