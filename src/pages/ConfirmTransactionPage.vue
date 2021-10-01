@@ -17,7 +17,7 @@
           :label="$t('address')"
           :rules="[
             (v) => !!v || $t('addressRequired'),
-            (v) => validateAddress(v) || 'invalid address format',
+            (v) => validateAddress(v) || $t('invalidAddressFormat'),
           ]"
         ></VTextField>
 

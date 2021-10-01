@@ -125,7 +125,7 @@
           outlined
           :label="$t('custodian')"
           :rules="[(v) => !!`${v}` || $t('custodianRequired')]"
-          :hint="$t('\'0x\' + Public key')"
+          :hint="$t('0x + Public key')"
         >
           <template v-slot:append>
             <div class="v-add-account-page__btn-inner">

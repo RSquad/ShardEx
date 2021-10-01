@@ -33,7 +33,7 @@
   "custodians": "Custodians",
   "custodian": "Custodian",
   "custodianRequired": "Custodian is required",
-  "'0x' + Public key": "'0x' + Public key",
+  "0x + Public key": "'0x' + Public key",
   "confirmTransaction": "Confirm transaction",
   "address": "Address",
   "addressRequired": "Address is required",
@@ -58,8 +58,12 @@
   "submit": "Submit",
   "exportSeedPhrase": "Export Seed Phrase",
   "seedPhrase": "Seed Phrase",
+  "seedPhraseRequired": "Seed phrase is required",
+  "seedPhraseInvalid": "Seed phrase is invalid",
   "exportSecretKey": "Export Secret Key",
+  "secretKeyInvalid": "Secret key is invalid",
   "secretKey": "Secret Key",
+  "secretKeyRequired": "Secret key is required",
   "AccountDetails": "Account details",
   "publicKey": "Public key",
   "creator": "Creator",
@@ -72,5 +76,8 @@
   "validatePassword": "Your password must be 6-64 characters, and include at least one lowercase letter and a number.",
   "createTransfer": "Create transfer",
   "yourBalance": "Your balance",
-  "create": "Create"
+  "create": "Create",
+  "restoryType": "Restory type",
+  "keypair": "Keypair",
+  "publicKeyRequired": "Public key is required"
 }

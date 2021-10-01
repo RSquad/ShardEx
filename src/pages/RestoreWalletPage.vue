@@ -9,7 +9,7 @@
         lazy-validation
         @submit.prevent="onSubmit"
       >
-        <h1 class="mb-5">Restore account</h1>
+        <h1 class="mb-5">{{ $t("restoreAccount") }}</h1>
         <VTextField
           autocomplete="off"
           dense
@@ -32,15 +32,15 @@
           v-model="restoryType"
           :items="[
             {
-              text: 'Seed phrase',
+              text: this.$t('seedPhrase'),
               value: 'seedPhrase',
             },
             {
-              text: 'Keypair',
+              text: this.$t('keypair'),
               value: 'keypair',
             },
           ]"
-          label="Restory type"
+          :label="$t('restoryType')"
           outlined
           :menu-props="{ 'offset-y': true, light: true }"
         ></VSelect>
@@ -50,10 +50,10 @@
           v-if="restoryType === 'seedPhrase'"
           v-model.trim="seedPhrase"
           outlined
-          label="Seed phrase"
+          :label="$t('seedPhrase')"
           :rules="[
-            (v) => !!v || 'Seed phrase is required',
-            (v) => !iSSeedPhraseValid || 'Seed phrase is invalid',
+            (v) => !!v || $t('seedPhraseRequired'),
+            (v) => !iSSeedPhraseValid || $t('seedPhraseInvalid'),
           ]"
           :success-messages="seedPhraseTips"
         ></VTextField>
@@ -63,10 +63,10 @@
           v-if="restoryType === 'keypair'"
           v-model.trim="publicKey"
           outlined
-          label="Public key"
+          :label="$t('publicKey')"
           :rules="[
-            (v) => !!v || 'Public key is required',
-            (v) => !iSSeedPhraseValid || 'Public key is invalid',
+            (v) => !!v || $t('publicKeyRequired'),
+            (v) => !iSSeedPhraseValid || $t('publicKeyRequired'),
           ]"
           :success-messages="seedPhraseTips"
         ></VTextField>
@@ -76,9 +76,9 @@
           v-if="restoryType === 'keypair'"
           v-model.trim="secretKey"
           outlined
-          label="Secret key"
+          :label="$t('secretKey')"
           :rules="[
-            (v) => !!v || 'Secret key is required',
+            (v) => !!v || $t('secretKeyRequired'),
             (v) => !iSSeedPhraseValid || 'Secret key is invalid',
           ]"
           :success-messages="seedPhraseTips"
@@ -91,7 +91,7 @@
           "
         >
           <div class="d-flex align-center justify-space-between mb-5">
-            <h2>Custodians: {{ custodians.length }}</h2>
+            <h2>{{ $t("custodians") }}: {{ custodians.length }}</h2>
             <VBtn
               min-width="30"
               :style="{ padding: 0 }"
@@ -109,9 +109,9 @@
             :key="index"
             v-model.trim="custodians[index]"
             outlined
-            label="Custodian"
-            :rules="[(v) => !!`${v}` || 'Custodian is required']"
-            hint="'0x' + Public key"
+            :label="$t('custodian')"
+            :rules="[(v) => !!`${v}` || $t('custodianRequired')]"
+            :hint="$t('0x + Public key')"
           >
             <template v-slot:append>
               <div class="v-restore-wallet-page__btn-inner">
