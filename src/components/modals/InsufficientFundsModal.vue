@@ -2,11 +2,8 @@
   <VDialog light v-model="model" max-width="325px">
     <VCard>
       <VCardTitle>
-        <h3>Insufficient funds</h3> </VCardTitle
-      ><VCardText
-        >You do not have the required funds available in your
-        account.</VCardText
-      >
+        <h3>{{ $t("insufficientFunds") }}</h3> </VCardTitle
+      ><VCardText>{{ $t("requiredFunds") }}</VCardText>
     </VCard>
   </VDialog>
 </template>

@@ -7,21 +7,21 @@
         lazy-validation
         @submit.prevent="onSubmit"
       >
-        <h1 class="mb-5">Add wallet</h1>
+        <h1 class="mb-5">{{ $t("addWallet") }}</h1>
         <VTextField
           autocomplete="off"
           dense
           v-model="name"
           clearable
           outlined
-          label="Name"
-          :rules="[(v) => !!v || 'Name is required']"
+          :label="$t('name')"
+          :rules="[(v) => !!v || $t('nameIsRequired')]"
         ></VTextField>
         <VSelect
           dense
           v-model="walletType"
           :items="walletsTypes"
-          label="Wallet type"
+          :label="$t('walletType')"
           outlined
           :menu-props="{ 'offset-y': true, light: true }"
         ></VSelect>
@@ -30,11 +30,11 @@
           class="mb-5"
           v-model="seedPhraseWorldCount"
           :items="[12, 24]"
-          label="World count"
+          :label="$t('worldCount')"
           outlined
           hide-details
           :menu-props="{ 'offset-y': true, light: true }"
-          :rules="[(v) => !!`${v}` || 'World count type is required']"
+          :rules="[(v) => !!`${v}` || $t('worldCountRequired')]"
         ></VSelect>
         <div class="d-flex justify-end mb-5">
           <VBtn
@@ -73,11 +73,11 @@
           v-if="accountsCount === 0"
           v-model.trim="password"
           :rules="[
-            (v) => !!v || 'Password is required',
-            (v) => validatePassword(v),
+            (v) => !!v || $t('passwordRequired'),
+            (v) => validatePassword(v, $t('validatePassword')),
           ]"
           outlined
-          label="Password"
+          :label="$t('password')"
           :append-icon="
             isHidePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
           "
@@ -92,8 +92,8 @@
           v-if="accountsCount === 0"
           v-model.trim="confirmPassword"
           :rules="[
-            (v) => !!v || 'Confirm password is required',
-            (v) => password === v || 'Passwords don\'t match',
+            (v) => !!v || $t('confirmPasswordRequired'),
+            (v) => newPassword === v || $t('passwordsDontMatch'),
           ]"
           outlined
           :append-icon="
@@ -101,10 +101,10 @@
           "
           @click:append="() => (isHidePassword = !isHidePassword)"
           :type="isHidePassword ? 'password' : 'text'"
-          label="Confirm password"
+          :label="$t('confirmPassword')"
         ></VTextField>
         <div class="d-flex align-center justify-space-between mb-5">
-          <h2>Custodians: {{ custodians.length }}</h2>
+          <h2>{{ $t("custodians") }}: {{ custodians.length }}</h2>
           <VBtn
             min-width="30"
             :style="{ padding: 0 }"
@@ -123,9 +123,9 @@
           :key="index"
           v-model.trim="custodians[index]"
           outlined
-          label="Custodian"
-          :rules="[(v) => !!`${v}` || 'Custodian is required']"
-          hint="'0x' + Public key"
+          :label="$t('custodian')"
+          :rules="[(v) => !!`${v}` || $t('custodianRequired')]"
+          :hint="$t('0x + Public key')"
         >
           <template v-slot:append>
             <div class="v-add-account-page__btn-inner">
@@ -161,7 +161,7 @@
             @click="$router.back()"
             class="mr-4"
           >
-            Back
+            {{ $t("back") }}
           </VBtn>
           <VBtn
             width="80"
@@ -170,7 +170,7 @@
             type="submit"
             :disabled="!valid || !name || isEmpty(custodians)"
           >
-            Add
+            {{ $t("add") }}
           </VBtn>
         </div>
       </VForm>

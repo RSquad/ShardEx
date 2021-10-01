@@ -7,6 +7,19 @@
         </RouterLink>
         <VSpacer />
         <VSelect
+          :items="languagesForSelect"
+          v-model="modelLanguage"
+          item-text="title"
+          item-value="value"
+          hide-details
+          dense
+          outlined
+          class="v-app-bar__lang-select"
+          background-color="#FFFFFF"
+          light
+          :menu-props="{ light: true, 'offset-y': true }"
+        />
+        <VSelect
           :items="networksForSelect"
           v-model="modelNetwork"
           item-text="title"
@@ -46,14 +59,14 @@
           <VCard light>
             <template v-if="!isEmpty(accounts)">
               <div class="d-flex justify-space-between align-center py-3 px-4">
-                <h2>Accounts</h2>
+                <h2>{{ $t("accounts") }}</h2>
                 <VTooltip v-if="isPopup" bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <VIcon @click="expandView" v-bind="attrs" v-on="on">
                       mdi-arrow-expand-all
                     </VIcon>
                   </template>
-                  <span>Expand view</span>
+                  <span>{{ $t("expandView") }}</span>
                 </VTooltip>
               </div>
               <v-divider></v-divider>
@@ -81,27 +94,27 @@
             <VList nav>
               <VListItem @click="onClickEasyAdd">
                 <VListItemContent>
-                  <VListItemTitle>Easy add account</VListItemTitle>
+                  <VListItemTitle>{{ $t("easyAddAccount") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
               <VListItem link to="/initialize/create">
                 <VListItemContent>
-                  <VListItemTitle>Add account</VListItemTitle>
+                  <VListItemTitle>{{ $t("addAccount") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
               <VListItem link to="/initialize/restore">
                 <VListItemContent>
-                  <VListItemTitle>Restore account</VListItemTitle>
+                  <VListItemTitle>{{ $t("restoreAccount") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
               <VListItem link to="/change-password">
                 <VListItemContent>
-                  <VListItemTitle>Change password</VListItemTitle>
+                  <VListItemTitle>{{ $t("changePassword") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
               <VListItem @click="onClickResetWallet">
                 <VListItemContent>
-                  <VListItemTitle>Reset wallet</VListItemTitle>
+                  <VListItemTitle>{{ $t("resetAccount") }}</VListItemTitle>
                 </VListItemContent>
               </VListItem>
             </VList>
@@ -123,7 +136,7 @@ import { walletModuleMapper } from "@/store/modules/wallet";
 import { convertSeedToKeyPair, generateSeed } from "@/ton/ton.utils";
 
 import { isEmpty } from "lodash";
-import { Component, Inject, Vue } from "vue-property-decorator";
+import { Component, Inject, Vue, Watch } from "vue-property-decorator";
 import Inner from "@/components/layout/Inner.vue";
 import { rootModuleMapper } from "@/store/root";
 import { passwordModuleMapper } from "@/store/modules/password";
@@ -173,6 +186,17 @@ const Mappers = Vue.extend({
 
 @Component({ components: { Inner } })
 export default class Header extends Mappers {
+  modelLanguage: "en" | "ru" = "en";
+  languagesForSelect = [
+    { title: "EN", value: "en" },
+    { title: "RU", value: "ru" },
+  ];
+
+  @Watch("modelLanguage")
+  onChangeLang(v: string) {
+    this.$root.$i18n.locale = v;
+  }
+
   onChange() {
     if (this.$route.path !== "/") {
       this.$router.push("/");
@@ -227,6 +251,8 @@ export default class Header extends Mappers {
     margin-right: 16px
   &__select
     max-width: 200px
+  &__lang-select
+    max-width: 75px !important
   &__list
     overflow-y: auto
 </style>

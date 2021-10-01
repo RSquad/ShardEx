@@ -14,11 +14,6 @@ module.exports = {
           toType: "dir",
         },
       ]),
-      // new RemovePlugin({
-      //   after: {
-      //     include: ["./dist/injection.html"],
-      //   },
-      // }),
     ],
     output: {
       filename: "js/[name].js",
@@ -38,9 +33,6 @@ module.exports = {
       entry: "./src/standalone/main.ts",
       filename: "index.html",
     },
-    // injection: {
-    //   entry: "./src/injection.ts",
-    // },
   },
 
   pluginOptions: {
@@ -49,12 +41,14 @@ module.exports = {
         background: {
           entry: "src/background.ts",
         },
-        // contentScripts: {
-        //   entries: {
-        //     "content-script": ["src/content-script.ts"],
-        //   },
-        // },
       },
+    },
+    i18n: {
+      locale: "en",
+      fallbackLocale: "en",
+      localeDir: "locales",
+      enableInSFC: false,
+      enableBridge: false,
     },
   },
 };
