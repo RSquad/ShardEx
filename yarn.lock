@@ -1058,10 +1058,10 @@
     "@types/connect" "*"
     "@types/node" "*"
 
-"@types/chrome@^0.0.135":
-  version "0.0.135"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.135.tgz#a4dc6dbdc68b3f7d04b24f04d0ca5c803392b72f"
-  integrity sha512-SczB5P5mIgQWHAeiimlYg5VFvuQKCw4Q5cAzVD7II1Czf4U0222jb3mTHUd1qM0BRJ/kPtzybBde+Zy2sdx/LA==
+"@types/chrome@^0.0.164":
+  version "0.0.164"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.164.tgz#0a7669cf7225df0c472c69f73ef4b7b1d2d94013"
+  integrity sha512-/EvjbfcowiA+f8Fwv5PSzxHhnAgjIx50Bjy1zQQYYwxlbJ+rI07CXMhrxwz4jUZlxLjnn/kugNQBjZIN58pKyg==
   dependencies:
     "@types/filesystem" "*"
     "@types/har-format" "*"
@@ -1168,10 +1168,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.9.tgz#97edc9037ea0c38585320b28964dde3b39e4660d"
   integrity sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==
 
-"@types/lodash@^4.14.165":
-  version "4.14.172"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.172.tgz#aad774c28e7bfd7a67de25408e03ee5a8c3d028a"
-  integrity sha512-/BHF5HAx3em7/KkzVKm3LrsD6HZAXuXO1AJZQ3cRRBZj4oHZDviWPYu0aEplAqDFNHZPW6d3G7KN+ONcCCC7pw==
+"@types/lodash@^4.14.177":
+  version "4.14.177"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.177.tgz#f70c0d19c30fab101cad46b52be60363c43c4578"
+  integrity sha512-0fDwydE2clKe9MNfvXHBHF9WEahRuj+msTuQqOmAApNORFvhMYZKNGGJdCzuhheVjMps/ti0Ak/iJPACMaevvw==
 
 "@types/mime@^1":
   version "1.3.2"

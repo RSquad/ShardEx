@@ -39,12 +39,10 @@
     "vuex-smart-module": "^0.5.0"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.135",
+    "@types/chrome": "^0.0.164",
     "@types/core-js": "^2.5.4",
-    "@types/lodash": "^4.14.165",
-    "@types/mocha": "^8.2.2",
+    "@types/lodash": "^4.14.177",
     "@types/node": "^14.14.22",
-    "@types/post-message-stream": "^3.0.0",
     "@types/webextension-polyfill": "^0.8.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
