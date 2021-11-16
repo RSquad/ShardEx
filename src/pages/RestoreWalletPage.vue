@@ -165,7 +165,7 @@
           v-model.trim="confirmPassword"
           :rules="[
             (v) => !!v || $t('confirmPasswordRequired'),
-            (v) => newPassword === v || 'Passwords don\'t match',
+            (v) => password === v || 'Passwords don\'t match',
           ]"
           :append-icon="
             isHidePassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'

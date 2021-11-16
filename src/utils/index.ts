@@ -24,24 +24,24 @@ export function formatDate(value: number, format = "DD.MM.YYYY, HH:mm") {
   return moment(value).format(format);
 }
 
-export const baseToAssetAmount = (amount: string, currency: "ETH" | "USDT" | "TON", fixed?: number) => {
+export const baseToAssetAmount = (amount: string, currency: "ETH" | "USDT" | "EVER", fixed?: number) => {
   if (!amount) return "";
   switch (currency) {
     case "ETH":
       return new BigNumber(amount).dividedBy(1000000000000000000).toFixed(fixed || 18);
-    case "TON":
+    case "EVER":
       return new BigNumber(amount).dividedBy(1000000000).toFixed(fixed || 9);
     case "USDT":
       return new BigNumber(amount).dividedBy(1000000000000000000).toFixed(fixed || 18);
   }
 };
 
-export const assetToBaseAmount = (amount: string, currency: "ETH" | "USDT" | "TON") => {
+export const assetToBaseAmount = (amount: string, currency: "ETH" | "USDT" | "EVER") => {
   if (!amount) return "";
   switch (currency) {
     case "ETH":
       return new BigNumber(amount).multipliedBy(1000000000000000000).toString();
-    case "TON":
+    case "EVER":
       return new BigNumber(amount).multipliedBy(1000000000).toString();
     case "USDT":
       return new BigNumber(amount).multipliedBy(1000000000000000000).toString();
@@ -50,7 +50,7 @@ export const assetToBaseAmount = (amount: string, currency: "ETH" | "USDT" | "TO
 
 export const convertAmountToUsd = (provider: string, amount: string) => {
   switch (provider) {
-    case "TON":
+    case "EVER":
       return new BigNumber(amount).multipliedBy("0.6787").toFixed(3);
     case "ETH":
       return new BigNumber(amount).multipliedBy("1795.53").toFixed(3);

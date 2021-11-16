@@ -12,19 +12,19 @@ import Transfer from "@/contracts/Transfer";
 
 export const walletsTypes = [
   // {
-  //   text: "Original TON wallet",
+  //   text: "Original Everscale wallet",
   //   value: "original",
   // },
   {
-    text: "Safe Multisig TON wallet",
+    text: "Safe Multisig Everscale wallet",
     value: "safe-multisig",
   },
   {
-    text: "Set Code Multisig TON wallet",
+    text: "Set Code Multisig Everscale wallet",
     value: "set-code-multisig",
   },
   {
-    text: "Set Code Multisig 2 TON wallet",
+    text: "Set Code Multisig 2 Everscale wallet",
     value: "set-code-multisig2",
   },
 ];
@@ -188,7 +188,7 @@ class AccountsActions extends Actions<AccountsState, AccountsGetters, AccountsMu
       tokens: [
         {
           name: name,
-          symbol: "TON",
+          symbol: "EVER",
           balance: "0",
           decimals: 10,
         },

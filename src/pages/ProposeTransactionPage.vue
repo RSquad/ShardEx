@@ -190,7 +190,7 @@ export default class TransferPage extends Mappers {
               functionName: "submitTransaction",
               input: {
                 dest: this.toAddress,
-                value: assetToBaseAmount(this.amount, "TON"),
+                value: assetToBaseAmount(this.amount, "EVER"),
                 bounce: false,
                 allBalance: false,
                 payload: body,

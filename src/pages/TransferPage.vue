@@ -29,7 +29,7 @@
             (v) => !!`${v}` || $t('amountTypeRequired'),
             (v) => validateAmount(v),
           ]"
-          :hint="`${$t('yourBalance')}: ${balance} TON`"
+          :hint="`${$t('yourBalance')}: ${balance} EVER`"
         ></VTextField>
 
         <VTextField
@@ -96,9 +96,9 @@ export default class TransferPage extends Mappers {
 
   public get balance(): string {
     if (this.activeAccountAddress) {
-      const token = this.getTokenBySymbol(this.activeAccountAddress, "TON");
+      const token = this.getTokenBySymbol(this.activeAccountAddress, "EVER");
       if (token) {
-        return baseToAssetAmount(token.balance, "TON", 3);
+        return baseToAssetAmount(token.balance, "EVER", 3);
       }
     }
     return "";
@@ -121,7 +121,7 @@ export default class TransferPage extends Mappers {
         await this.transferOrProposeTransfer({
           addressFrom: this.activeAccountAddress,
           addressTo: this.address,
-          amount: assetToBaseAmount(this.amount, "TON"),
+          amount: assetToBaseAmount(this.amount, "EVER"),
           client: tonService.client,
           message: this.message,
           keypair: result.keypair,
