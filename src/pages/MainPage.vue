@@ -60,7 +60,7 @@
           src="@/assets/img/balance-card-background.svg"
         >
           <h2>{{ account && account.name ? account.name : "" }}</h2>
-          <h1>{{ baseToAssetAmount(balance, "TON", 3) + " " + "TON" }}</h1>
+          <h1>{{ baseToAssetAmount(balance, "EVER", 3) + " " + "EVER" }}</h1>
           <VTooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <VBtn
@@ -134,7 +134,7 @@
             </td>
             <td>
               <div class="v-main-page__table-amount">
-                {{ item.fValue + " TON" }}
+                {{ item.fValue + " EVER" }}
               </div>
               <VTooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
@@ -364,7 +364,7 @@ export default class MainPage extends Mappers {
 
   public get balance(): string {
     if (this.activeAccountAddress) {
-      const token = this.getTokenBySymbol(this.activeAccountAddress, "TON");
+      const token = this.getTokenBySymbol(this.activeAccountAddress, "EVER");
       if (token) {
         return token.balance;
       }

@@ -1,6 +1,6 @@
 # ShardEx
 
-ShardEx is a free, secure and multi-functional FreeTon wallet implemented as a browser add-on.
+ShardEx is a free, secure and multi-functional Everscale wallet implemented as a browser add-on.
 
 ## Technical stack
 
@@ -69,7 +69,7 @@ If you see an EACCES error when you try to install a package globally on Mac or 
 
 ## Compatibility and support
 
-**TON-SDK v1.12**
+**EVER-SDK v1.12**
 
 **nodejs**
 

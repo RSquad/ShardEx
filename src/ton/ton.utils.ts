@@ -193,7 +193,7 @@ export const formatTx = (tx: TxType) => {
     fId: sliceString(tx.id, 8),
     type: value.isLessThan(0) ? "minus" : "plus",
     address: sliceString(address),
-    fValue: baseToAssetAmount(value.toString(), "TON", 3),
+    fValue: baseToAssetAmount(value.toString(), "EVER", 3),
   };
 };
 

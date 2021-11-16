@@ -60,7 +60,7 @@ export default class DeployModal extends Mappers {
           await this.deploy({
             address: this.activeAccountAddress,
             client: tonService.client,
-            symbol: "TON",
+            symbol: "EVER",
             networkServer: this.activeNetworkServer,
             keypair: result.keypair,
           });

@@ -114,7 +114,7 @@ export default class Layout extends Mappers {
         } else {
           this.updateBalanceByAddressMut({
             address: val.activeAccountAddress,
-            symbol: "TON",
+            symbol: "EVER",
             newBalance: "0",
           });
         }
@@ -158,7 +158,7 @@ export default class Layout extends Mappers {
         } else {
           this.updateBalanceByAddressMut({
             address: this.activeAccountAddress,
-            symbol: "TON",
+            symbol: "EVER",
             newBalance: "0",
           });
         }
@@ -174,7 +174,7 @@ export default class Layout extends Mappers {
     if (address)
       await this.updateBalanceByAddress({
         address,
-        symbol: "TON",
+        symbol: "EVER",
         client: tonService.client,
       });
   }

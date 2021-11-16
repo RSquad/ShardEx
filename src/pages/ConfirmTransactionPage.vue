@@ -130,7 +130,7 @@ export default class TransferPage extends Mappers {
       fId: sliceString(tx.id),
       fCreator: sliceString(tx.creator),
       to: sliceString(tx.dest),
-      fValue: baseToAssetAmount(tx.value, "TON", 3),
+      fValue: baseToAssetAmount(tx.value, "EVER", 3),
     };
   }
 
